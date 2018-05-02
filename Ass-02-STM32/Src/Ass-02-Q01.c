@@ -15,12 +15,9 @@ int isControlChar(char c){
 	else return false;
 }
 
-<<<<<<< HEAD
 
-=======
 int count=0;
 char *array_of_inputs; // array which stores the characters
->>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
 
 void CommandLineParserInit(void)
 {
@@ -41,21 +38,15 @@ void CommandLineParserProcess(void)
 	if (!isControlChar(c)){
 		printf("%c", c);
 		// store in the next element of array and increes counter by 1
-<<<<<<< HEAD
-=======
+
 		array_of_inputs[count]=c;
 		count++;
-
->>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
 	} else {
 		switch (c){
 		case CR :
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
-<<<<<<< HEAD
-=======
 			array_of_inputs[count] = NULL;
->>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
 			break;
 		case DEL:
 			printf("\b");
@@ -66,8 +57,7 @@ void CommandLineParserProcess(void)
 			printf(" %i ",c);
 		}
 	}
-<<<<<<< HEAD
-=======
+
 //checking the input
 int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
 	typedef struct{
@@ -88,9 +78,6 @@ int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
 
 }
 
-
-
->>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
   }
 #else
   c = getchar();
