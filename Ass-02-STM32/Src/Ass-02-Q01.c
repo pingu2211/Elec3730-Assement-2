@@ -27,12 +27,10 @@ void CommandLineParserInit(void)
 void CommandLineParserProcess(void)
 {
   uint8_t c;
-
   // Check for input and echo back
 #ifdef STM32F407xx
   if (HAL_UART_Receive(&huart2, &c, 1, 0x0) == HAL_OK)
   {
-
 	HAL_GPIO_TogglePin(GPIOD, LD4_Pin); // Toggle LED4
 	if (!isControlChar(c)){
 		printf("%c", c);
@@ -44,10 +42,10 @@ void CommandLineParserProcess(void)
 		case DEL:
 			printf("\b");
 			break;
+
 		default:
 			printf(" %i ",c);
 		}
-
 	}
 
 
