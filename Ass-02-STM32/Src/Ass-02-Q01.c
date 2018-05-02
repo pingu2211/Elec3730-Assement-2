@@ -54,8 +54,6 @@ void CommandLineParserProcess(void)
 
 		default:
 			printf(" %i ",c);
-			word_p[count] = c;
-			count++;
 		}
 	}
 
