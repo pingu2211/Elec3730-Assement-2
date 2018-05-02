@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include <malloc.h>
 #include <string.h>
+#include <stdbool.h>
 
 // Assignment main
 extern void Ass_02_Main(void);
