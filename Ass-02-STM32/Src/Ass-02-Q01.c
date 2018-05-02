@@ -29,26 +29,27 @@ void CommandLineParserProcess(void)
   uint8_t c;
   // Check for input and echo back
 #ifdef STM32F407xx
-  if (HAL_UART_Receive(&huart2, &c, 1, 0x0) == HAL_OK)
+  if (HAL_UART_Receive(&huart2, &c, 1, 0x0) == HAL_OK) //Receive a new character and store in c
   {
 	HAL_GPIO_TogglePin(GPIOD, LD4_Pin); // Toggle LED4
 	if (!isControlChar(c)){
 		printf("%c", c);
+		// store in the next element of array and increes counter by 1
 	} else {
 		switch (c){
 		case CR :
 			printf("\n");
+			// add \0 to the end of the string and then give it to q3 of assesment 1
 			break;
 		case DEL:
 			printf("\b");
+			// subtract 1 from count
 			break;
 
 		default:
 			printf(" %i ",c);
 		}
 	}
-
-
   }
 #else
   c = getchar();
