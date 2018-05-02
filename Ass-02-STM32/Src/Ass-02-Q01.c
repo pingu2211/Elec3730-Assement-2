@@ -51,6 +51,7 @@ void CommandLineParserProcess(void)
 	}
 
 // this be the Tweedale
+	// another testing comment
 
   }
 #else
