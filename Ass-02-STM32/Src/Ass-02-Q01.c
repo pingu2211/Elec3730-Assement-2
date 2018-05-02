@@ -7,6 +7,7 @@
 #include "usart.h"
 #endif
 #include <stdbool.h>
+#include "calculator.h"
 enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
 
 int isControlChar(char c){
@@ -14,7 +15,12 @@ int isControlChar(char c){
 	else return false;
 }
 
+<<<<<<< HEAD
 
+=======
+int count=0;
+char *array_of_inputs; // array which stores the characters
+>>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
 
 void CommandLineParserInit(void)
 {
@@ -35,11 +41,21 @@ void CommandLineParserProcess(void)
 	if (!isControlChar(c)){
 		printf("%c", c);
 		// store in the next element of array and increes counter by 1
+<<<<<<< HEAD
+=======
+		array_of_inputs[count]=c;
+		count++;
+
+>>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
 	} else {
 		switch (c){
 		case CR :
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
+<<<<<<< HEAD
+=======
+			array_of_inputs[count] = NULL;
+>>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
 			break;
 		case DEL:
 			printf("\b");
@@ -50,6 +66,31 @@ void CommandLineParserProcess(void)
 			printf(" %i ",c);
 		}
 	}
+<<<<<<< HEAD
+=======
+//checking the input
+int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
+	typedef struct{
+	int8_t *Command_string; 										// Command string
+	int8_t (*Function_p)(uint8_t num_count, uint8_t *numbers_p[]);	// Function pointer				//
+	int8_t *Help_s; 													// Help information
+	} command_s;
+
+	const command_s CommandList[] = {
+	{"add", &add, 		"add <num 1> .. <num N>"},
+	{"sub", &subtract, 	"sub <num 1> <num 2>"},
+	{"mul", &multiply, 	"mul <num 1> .. <num N>"},
+	{"div", &divide, 	"div <num 1> <num 2>"},
+	{NULL, NULL, NULL}
+	};
+	//printf(%d,&result);
+
+
+}
+
+
+
+>>>>>>> 384edc0d71792cb8a542888f44b6a8b9fb38e048
   }
 #else
   c = getchar();
