@@ -14,8 +14,7 @@ int isControlChar(char c){
 	else return false;
 }
 
-int count=0;
-char *word_p; // array which stores the characters
+
 
 void CommandLineParserInit(void)
 {
@@ -36,29 +35,21 @@ void CommandLineParserProcess(void)
 	if (!isControlChar(c)){
 		printf("%c", c);
 		// store in the next element of array and increes counter by 1
-		word_p[count]=c;
-		count++;
-
 	} else {
 		switch (c){
 		case CR :
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
-			word_p[count] = NUL;
 			break;
 		case DEL:
 			printf("\b");
 			// subtract 1 from count
-			count--;
 			break;
 
 		default:
 			printf(" %i ",c);
-			word_p[count] = c;
-			count++;
 		}
 	}
-
   }
 #else
   c = getchar();

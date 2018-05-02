@@ -17,7 +17,6 @@ uint8_t BSP_TP_Init(void)
   // Initialise the interface and calibrate
   TP_Init(); // This is an empty function since done by STM32CubeMX
   TouchPanel_Calibrate();
-
   return 0;
 }
 

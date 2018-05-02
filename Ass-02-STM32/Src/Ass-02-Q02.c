@@ -4,9 +4,13 @@
 
 #include "Ass-02.h"
 
-//
-// REPLACE THE EXAMPLE CODE WITH YOUR CODE 
-//
+struct button{
+	int width, hight, x, y;
+	char * text;
+};
+
+
+
 
 void CalculatorInit(void)
 {
@@ -21,11 +25,9 @@ void CalculatorInit(void)
 
 void CalculatorProcess(void)
 {
-
+  // STEPIEN: Assume horizontal display
   uint16_t linenum = 0;
-
   // getDisplayPoint(&display, Read_Ads7846(), &matrix );
-  //if (BSP_TP_GetDisplayPo2int(&display) == 0);
-
+  if (BSP_TP_GetDisplayPoint(&display) == 0);
 
 }
