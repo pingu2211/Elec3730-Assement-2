@@ -4,9 +4,10 @@
 
 #include "Ass-02.h"
 
-//
-// PLACE YOUR COMMON CODE HERE 
-//
+typedef struct button{
+	int width, hight, x, y;
+	char * text;
+};
 
 // STEPIEN: Added two touch panel functions to make the interface more
 //          consistent with the LCD BSP.
