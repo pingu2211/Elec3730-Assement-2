@@ -45,7 +45,7 @@ void CommandLineParserProcess(void)
 		case CR :
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
-			array_of_inputs[count] = NUL;
+			array_of_inputs[count] = NULL;
 			break;
 		case DEL:
 			printf("\b");
@@ -60,7 +60,7 @@ void CommandLineParserProcess(void)
 //checking the input
 int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
 	typedef struct{
-	int8_t *Command_s; 													// Command string
+	int8_t *Command_string; 										// Command string
 	int8_t (*Function_p)(uint8_t num_count, uint8_t *numbers_p[]);	// Function pointer				//
 	int8_t *Help_s; 													// Help information
 	} command_s;
@@ -72,7 +72,11 @@ int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
 	{"div", &divide, 	"div <num 1> <num 2>"},
 	{NULL, NULL, NULL}
 	};
+	//printf(%d,&result);
+
+
 }
+
 
 
   }
