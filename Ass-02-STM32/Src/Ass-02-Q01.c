@@ -6,10 +6,15 @@
 #ifdef STM32F407xx
 #include "usart.h"
 #endif
+#include <stdbool.h>
+enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
 
-//
-// REPLACE THE EXAMPLE CODE WITH YOUR CODE
-//
+int isControlChar(char c){
+	int code;
+	if (c<32||c==127) return true;
+	else return false;
+}
+
 
 void CommandLineParserInit(void)
 {
@@ -27,27 +32,26 @@ void CommandLineParserProcess(void)
 #ifdef STM32F407xx
   if (HAL_UART_Receive(&huart2, &c, 1, 0x0) == HAL_OK)
   {
-    printf("SERIAL: Got '%c'\n", c);
-    HAL_GPIO_TogglePin(GPIOD, LD4_Pin); // Toggle LED4
 
-    // STEPIEN: The following is some test code that can be removed
-    //
-    {
-      int c;
-      char si[]="1234";
-      int i=111;
-      char sf[]="r5b6c7d8";
-      float f=2.22;
+	HAL_GPIO_TogglePin(GPIOD, LD4_Pin); // Toggle LED4
+	if (!isControlChar(c)){
+		printf("%c", c);
+	} else {
+		switch (c){
+		case CR :
+			printf("\n");
+			break;
+		case DEL:
+			printf("\b");
+			break;
+		default:
+			printf(" %i ",c);
+		}
 
-      printf("TEST: Float printf() test: %f\n", 1.234);
-      sscanf(si, "%d", &i);
-      c=sscanf(sf, "%f", &f);
-      printf("TEST: Input string : '%s'\n", si);
-      printf("TEST: Input int    : %d\n", i);
-      printf("TEST: Input string : '%s'\n", sf);
-      printf("TEST: Input float  : %f\n", f);
-      printf("TEST: c=%d\n",c);
-    }
+	}
+
+
+
   }
 #else
   c = getchar();
