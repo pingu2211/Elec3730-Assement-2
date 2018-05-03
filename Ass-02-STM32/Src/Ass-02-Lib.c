@@ -31,6 +31,7 @@ uint8_t BSP_TP_GetDisplayPoint(Coordinate *pDisplay)
   }
   if (getDisplayPoint(pDisplay, pScreen, &matrix ) == DISABLE)
   {
+	printf("Error in LCD");
     return 1; // Error in LCD
   }
   return 0;

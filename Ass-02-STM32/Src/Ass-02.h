@@ -20,6 +20,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 
 // Assignment main
@@ -32,6 +33,7 @@ extern void Ass_02_Main(void);
 // Question 1
 extern void CommandLineParserInit(void);
 extern void CommandLineParserProcess(void);
+bool USR_DBG;
 
 // Question 2
 extern void CalculatorInit(void);

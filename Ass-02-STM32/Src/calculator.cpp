@@ -1,34 +1,97 @@
 //Calculator functions
 
-#include <stdio.h>
-#include<stdint.h>
+#include "Ass-02.h"
 
-int8_t divide (uint8_t *numbers_p[], uint8_t count) {
+bool isNumber(char * str){
+	for (int i=0;str[i]!='\0';i++){
+		if ( (str[i] < 48 || str[i] >57)&&(str[i]!=45||str[i]!=46) )return false;
+	}
+	return true;
 }
 
-int8_t subtract (uint8_t *numbers_p[], uint8_t count) {
+
+int8_t divide (char *numbers_p[], uint8_t count) {
+	if (count < 2){
+		printf("Too Few Arguments, got %i, expected 2",count);
+		return NULL;
+	}
+	if (count > 2){
+			printf("Too Many Arguments, got %i, expected 2", count);
+			return NULL;
+		}
+	if (!isNumber(numbers_p[0])||!isNumber(numbers_p[1])){
+		printf("Arguments must be real numbers");
+		return NULL;
+	}
+
+	return (atof(numbers_p[0])/atof(numbers_p[1]));
 }
 
-int8_t add(uint8_t *numbers_p[], uint8_t count) {
+int8_t subtract (char *numbers_p[], uint8_t count) {
+	if (count < 2){
+		printf("Too Few Arguments, got %i, expected 2",count);
+		return NULL;
+	}
+	if (count > 2){
+			printf("Too Many Arguments, got %i, expected 2", count);
+			return NULL;
+		}
+	if (!isNumber(numbers_p[0])||!isNumber(numbers_p[1])){
+		printf("Arguments must be real numbers");
+		return NULL;
+	}
 
-/*	double sum = 0;
+	return (atof(numbers_p[0])-atof(numbers_p[1]));
+}
+
+int8_t add(char *numbers_p[], uint8_t count) {
+
+	double sum = 0;
 
 	for (int i = 0; i < count; i++)
 	{
-		sum += numbers_p[i];
+		if (!isNumber(numbers_p[i])){
+				printf("Arguments must be real numbers");
+				return NULL;
+			}
+		sum += atof(numbers_p[i]);
 	}
-	return sum;*/
+	return sum;
 }
 
 
 
-int8_t multiply(uint8_t *numbers_p[], uint8_t count) {
+int8_t multiply(char *numbers_p[], uint8_t count) {
 
-/*	double sum = 1;
+	double sum = 1;
 
 	for (int i = 0; i < count; i++)
 	{
-		sum *= numbers_p[i];
+		if (!isNumber(numbers_p[i])){
+				printf("Arguments must be real numbers");
+				return NULL;
+			}
+		sum += atof(numbers_p[i]);
 	}
-	return sum;*/
+	return sum;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
