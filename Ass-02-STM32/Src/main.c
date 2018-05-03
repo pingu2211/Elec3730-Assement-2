@@ -87,6 +87,7 @@ int main(void)
 
   // STEPIEN: Set the buffer sizes to 1
   //
+
   setvbuf(stdin, NULL, _IONBF, 0);
   setvbuf(stdout, NULL, _IONBF, 0);
   setvbuf(stderr, NULL, _IONBF, 0);
