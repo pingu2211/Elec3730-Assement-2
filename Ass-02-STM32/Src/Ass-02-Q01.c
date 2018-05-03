@@ -128,6 +128,26 @@ void CommandLineParserProcess(void)
 
 	}
 
+	//new string passer function - Will's edit
+	int string_passer(char *array_of_inputs, char **array_of_strings_p[])
+		{
+			 	 	 	 	 	 	 	 	// declare all the things
+				int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
+				int j = 0;					// j keeps track of how long the current word is
+				char **array_of_strings;	// pointer to array or input strings
+
+				int input_length = strlen (array_of_inputs);			// make sure the input string actually has something in it
+				if (input_length <= 0) return -1;						// if input is empty return error
+
+				array_of_strings = (char**)malloc(sizeof( *array_of_strings) * input_length);	// allocate some memory, for now we'll assume ever character is its own word and trim it down later
+					if (!array_of_strings) {														//make sure  memory was allocated successfully
+						printf ("\nError in String Passer\nError reallocating memory");
+							return -1;
+					}
+
+
+  }
+
 //checking the input
 int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
 	typedef struct{
