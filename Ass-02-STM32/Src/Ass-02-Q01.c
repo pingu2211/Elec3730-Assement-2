@@ -60,9 +60,9 @@ void CommandLineParserProcess(void)
 	int string_parser(char *array_of_inputs, char **array_of_strings_p[])
 	{
 		/* declare all the things */
-			int inp_count=0;
-			int j = 0;
-			char **array_of_strings;	// this particular one helps me wrap my head arround pointers to pointers to pointers.....
+			int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
+			int j = 0;					// j keeps track of how long the current word is
+			char **array_of_strings;	// pointer to array or input strings
 
 			int input_length = strlen (array_of_inputs);			// make sure the input string actually has something in it
 			if (input_length <= 0) return -1;						// if input is empty return error
@@ -72,8 +72,8 @@ void CommandLineParserProcess(void)
 				printf ("\nError in String Passer\nError reallocating memory");
 				return -1;
 			}
-			array_of_strings[inp_count] = (char*)malloc(input_length);	// allocate some memory to the first word, and assume its going to be as long as the entire input string
-			if (!array_of_strings[inp_count]) { 						//make sure memory was allocated successfully
+			array_of_strings[inp_count] = (char*)malloc(input_length);				// allocate some memory to the first word, and assume its going to be as long as the entire input string
+			if (!array_of_strings[inp_count]) { 									//make sure memory was allocated successfully
 				printf ("\nError in String Passer\nError reallocating memory");
 				return -1;
 			}
@@ -83,15 +83,15 @@ void CommandLineParserProcess(void)
 					array_of_strings[inp_count][j] = array_of_inputs[i];
 					j++;										// j is for keeping track of how long the current word is
 				}
-				else if (j>0) {									// if the current character in the input is a space, AND the last character wasnt a space either
+				else if (j>0) {									// if the current character in the input is a space, AND the last character wasn't a space either
 					array_of_strings[inp_count][j] = '\0';											// add a null terminator
-					array_of_strings[inp_count] = (char*)realloc(array_of_strings[inp_count],j+1);	// trim the array down, save some memmory, we didnt always have thousands of bits to play with laddy
-					if (!array_of_strings[inp_count]) {												// make sure that went ok.... or fail gracefully
+					array_of_strings[inp_count] = (char*)realloc(array_of_strings[inp_count],j+1);	// trim the array down, save some memory, we didn't always have thousands of bits to play with laddy
+					if (!array_of_strings[inp_count]) {												//make sure memory was allocated successfully
 						printf ("\nError in String Passer\nError reallocating memory");
 						return -1;
 					}
 					inp_count++;													// HEY!! we just got to the end of the word!! should keep an eye on how many we've got so far
-					array_of_strings[inp_count] = (char*)malloc (input_length-i);	//allocate some memory,and we wont ever need more than the lengh of the input array less what we've already dealt with
+					array_of_strings[inp_count] = (char*)malloc (input_length-i);	//allocate some memory,and we wont ever need more than the length of the input array less what we've already dealt with
 					if (!array_of_strings[inp_count]) { //make sure that went ok or fail gracefully
 						printf ("\nError in String Passer\nError reallocating memory");
 						return -1;
