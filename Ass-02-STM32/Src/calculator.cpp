@@ -77,7 +77,16 @@ int8_t multiply(char *numbers_p[], uint8_t count) {
 }
 
 
-
+int8_t debug(char *args[], uint8_t count){
+	if (count==0)USR_DBG=!USR_DBG;
+	if (count==1){
+		if (args[1]=="on"||args[1]=="ON"){
+			USR_DBG=true;
+		}else{
+			USR_DBG=false;
+		}
+	}
+}
 
 
 

@@ -46,6 +46,7 @@ void CommandLineParserProcess(void)
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
 			array_of_inputs[count] = NULL;	// add \0 to the end of the string
+
 			break;
 		case DEL:			// case 2: if user presses "backspace"
 			printf("\b");
