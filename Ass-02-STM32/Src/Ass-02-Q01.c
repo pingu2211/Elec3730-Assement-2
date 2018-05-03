@@ -82,10 +82,9 @@ void CommandLineParserInit(void)
   printf("Command Line Parser Example\n");
 }
 
-
 typedef struct{
 int8_t *Command_string; 										// Command string
-int8_t (*Function_p)(uint8_t num_count, uint8_t *numbers_p[]);	// Function pointer				//
+int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);	// Function pointer				//
 int8_t *Help_s; 													// Help information
 } command_s;
 
@@ -103,7 +102,7 @@ int Command_Function(int num_count, char **Array_numbers){
 
 	for (int i=0;CommandList[i].Command_string!=NULL;i++){
 		if(strcmp(CommandList[i].Command_string,Array_numbers[0])==0){
-			CommandList[i].Function_p(num_count-1,Args);
+			CommandList[i].Function_p(Args,num_count-1);
 		}
 	}
 	return 0;
@@ -124,24 +123,23 @@ void CommandLineParserProcess(void)
 		printf("%c", c);
 		input_s[_count]=c;	// store in the next element of array
 		_count++;					// increase counter by 1
-
 	} else {
 		switch (c){
 		case CR :			// case 1: if user presses "enter"
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
-			if (count>1){
+			if (_count>1){
 				input_s[_count] = '\0';	// add \0 to the end of the string
 				wordcount = string_parser (input_s, &words);
 				Command_Function(wordcount, words);
 				if(USR_DBG)printf("%s\n",input_s);
 				free(input_s);
-				count = 0;
+				_count = 0;
 			}
 			break;
 		case DEL:			// case 2: if user presses "backspace"
 			printf("\b");
-			count--;		// subtract 1 from count
+			_count--;		// subtract 1 from count
 
 			break;
 

@@ -17,77 +17,76 @@ bool isNumber(char * str){
 
 
 int8_t divide (char *numbers_p[], uint8_t count) {
-	if (count < 2){
-		printf("Too Few Arguments, got %i, expected 2",count);
-		return NULL;
-	}
-	if (count > 2){
-			printf("Too Many Arguments, got %i, expected 2", count);
-			return NULL;
+	double * numbers =  malloc(count*sizeof(double));
+		for (int i = 0; i < count; i++){
+			if (!isNumber(numbers_p[i])){
+				printf("Arguments must be real numbers");
+				return -1;
+			}else{
+				numbers[i]=atof(numbers_p[i]);
+			}
 		}
-	if (!isNumber(numbers_p[0])||!isNumber(numbers_p[1])){
-		printf("Arguments must be real numbers");
-		return NULL;
-	}
-
-	return (atof(numbers_p[0])/atof(numbers_p[1]));
+		printf("%lf",numbers[0]/numbers[1]);
+		return (0);
 }
 
 int8_t subtract (char *numbers_p[], uint8_t count) {
-	if (count < 2){
-		printf("Too Few Arguments, got %i, expected 2",count);
-		return NULL;
-	}
-	if (count > 2){
-			printf("Too Many Arguments, got %i, expected 2", count);
-			return NULL;
-		}
-	if (!isNumber(numbers_p[0])||!isNumber(numbers_p[1])){
-		printf("Arguments must be real numbers");
-		return NULL;
-	}
 
-	return (atof(numbers_p[0])-atof(numbers_p[1]));
+	double * numbers =  malloc(count*sizeof(double));
+	for (int i = 0; i < count; i++){
+		if (!isNumber(numbers_p[i])){
+			printf("Arguments must be real numbers");
+			return -1;
+		}else{
+			numbers[i]=atof(numbers_p[i]);
+		}
+	}
+	printf("%lf",numbers[0]-numbers[1]);
+	return (0);
 }
 
 int8_t add(char *numbers_p[], uint8_t count) {
-	printf("adding %i numbers: ", count);
-	for (int i = 0; i < count; i++)
-		{
-			printf("%s ",numbers_p[i]);
-		}
-
-	double sum = 0;
-
-	for (int i = 0; i < count; i++)
-	{
-		if (isNumber(numbers_p[i])){
-			sum += atof(numbers_p[i]);
-		}else{
-
+	double * numbers =  malloc(count*sizeof(double));
+	for (int i = 0; i < count; i++){
+		if (!isNumber(numbers_p[i])){
 			printf("Arguments must be real numbers");
 			return -1;
+		}else{
+			numbers[i]=atof(numbers_p[i]);
 		}
 	}
-	printf("%i\n",sum);
+
+
+	double sum = 0;
+	for (int i = 0; i < count; i++)
+	{
+		sum += numbers[i];
+	}
+	printf("%lf\n",sum);
 	return 0;
 }
 
 
 
 int8_t multiply(char *numbers_p[], uint8_t count) {
+	double * numbers =  malloc(count*sizeof(double));
+	for (int i = 0; i < count; i++){
+		if (!isNumber(numbers_p[i])){
+			printf("Arguments must be real numbers");
+			return -1;
+		}else{
+			numbers[i]=atof(numbers_p[i]);
+		}
+	}
 
 	double sum = 1;
-
 	for (int i = 0; i < count; i++)
 	{
-		if (!isNumber(numbers_p[i])){
-				printf("Arguments must be real numbers");
-				return NULL;
-			}
-		sum += atof(numbers_p[i]);
+
+		sum += numbers[i];
 	}
-	return sum;
+	printf("%lf\n",sum);
+	return 0;
 }
 
 
