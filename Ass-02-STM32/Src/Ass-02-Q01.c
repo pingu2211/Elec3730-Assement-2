@@ -219,13 +219,12 @@ void CommandLineParserProcess(void)
 	}
 
 	//new string passer 2 function - Will's edit
-	int string_passer(char *input_string, char **array_of_strings_p[])
+	char string_passer(char *input_string, char **array_of_strings[])
 		{
 			 	 	 	 	 	 	 	 	// declare all the things
 				int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
-				int j = 0;					// j keeps track of how long the current word is
-				char **array_of_strings;	// pointer to array or input strings
-				char *command;				// pointer to command string
+/*				int j = 0;					// j keeps track of how long the current word is*/
+				//char **array_of_strings;	// pointer to array or input strings
 
 				int input_length = strlen (input_string);			// make sure the input string actually has something in it
 				if (input_length <= 0) return -1;						// if input is empty return error
@@ -247,7 +246,7 @@ void CommandLineParserProcess(void)
 							inp_count++;
 						}
 
-				return *array_of_strings;
+				return 0;
 				}
 
   }
@@ -281,5 +280,5 @@ int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]){
   c = getchar();
   printf("SERIAL: Got '%c'\n", c);
 #endif
-}
+
 

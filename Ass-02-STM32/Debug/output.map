@@ -547,7 +547,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a Drivers/Fonts/font16.o
  .debug_macro   0x00000000      0x1df Drivers/Fonts/font16.o
  .debug_line    0x00000000      0x2c8 Drivers/Fonts/font16.o
- .debug_str     0x00000000     0x35c5 Drivers/Fonts/font16.o
+ .debug_str     0x00000000     0x358c Drivers/Fonts/font16.o
  .comment       0x00000000       0x80 Drivers/Fonts/font16.o
  .ARM.attributes
                 0x00000000       0x39 Drivers/Fonts/font16.o
@@ -575,7 +575,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a Drivers/Fonts/font20.o
  .debug_macro   0x00000000      0x1df Drivers/Fonts/font20.o
  .debug_line    0x00000000      0x2c8 Drivers/Fonts/font20.o
- .debug_str     0x00000000     0x35c5 Drivers/Fonts/font20.o
+ .debug_str     0x00000000     0x358c Drivers/Fonts/font20.o
  .comment       0x00000000       0x80 Drivers/Fonts/font20.o
  .ARM.attributes
                 0x00000000       0x39 Drivers/Fonts/font20.o
@@ -619,7 +619,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a Drivers/Fonts/font8.o
  .debug_macro   0x00000000      0x1df Drivers/Fonts/font8.o
  .debug_line    0x00000000      0x2c7 Drivers/Fonts/font8.o
- .debug_str     0x00000000     0x35c3 Drivers/Fonts/font8.o
+ .debug_str     0x00000000     0x358a Drivers/Fonts/font8.o
  .comment       0x00000000       0x80 Drivers/Fonts/font8.o
  .ARM.attributes
                 0x00000000       0x39 Drivers/Fonts/font8.o
@@ -1187,8 +1187,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
- .debug_line    0x00000000      0xccd Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
- .debug_str     0x00000000    0xbeb64 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
+ .debug_line    0x00000000      0xbb0 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
+ .debug_str     0x00000000    0xbeb2b Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
  .debug_frame   0x00000000       0x58 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o
  .ARM.attributes
@@ -1349,8 +1349,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
- .debug_line    0x00000000      0xb7e Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
- .debug_str     0x00000000    0xbeb74 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
+ .debug_line    0x00000000      0xa61 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
+ .debug_str     0x00000000    0xbeb3b Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
  .debug_frame   0x00000000      0x13c Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o
  .ARM.attributes
@@ -1496,8 +1496,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
- .debug_line    0x00000000      0xb58 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
- .debug_str     0x00000000    0xbebde Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
+ .debug_line    0x00000000      0xa3b Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
+ .debug_str     0x00000000    0xbeba5 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
  .debug_frame   0x00000000       0xa8 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o
  .ARM.attributes
@@ -1626,8 +1626,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
- .debug_line    0x00000000      0x98f Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
- .debug_str     0x00000000    0xbe7e9 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
+ .debug_line    0x00000000      0x872 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
+ .debug_str     0x00000000    0xbe7b0 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
  .ARM.attributes
                 0x00000000       0x39 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o
@@ -1918,8 +1918,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
- .debug_line    0x00000000      0xb0f Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
- .debug_str     0x00000000    0xbec00 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
+ .debug_line    0x00000000      0x9f2 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
+ .debug_str     0x00000000    0xbebc7 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
  .debug_frame   0x00000000      0x128 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o
  .ARM.attributes
@@ -2062,8 +2062,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
- .debug_line    0x00000000      0xa39 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
- .debug_str     0x00000000    0xbeaa3 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
+ .debug_line    0x00000000      0x91c Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
+ .debug_str     0x00000000    0xbea6a Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
  .debug_frame   0x00000000       0x98 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
  .ARM.attributes
@@ -2335,8 +2335,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_line    0x00000000      0xa57 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_str     0x00000000    0xbea39 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_line    0x00000000      0x93a Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_str     0x00000000    0xbea00 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .debug_frame   0x00000000       0x5c Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
  .ARM.attributes
@@ -2811,8 +2811,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_line    0x00000000      0x985 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_str     0x00000000    0xbe7df Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_line    0x00000000      0x868 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_str     0x00000000    0xbe7a6 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
  .ARM.attributes
                 0x00000000       0x39 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
@@ -2940,8 +2940,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x202 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
  .debug_macro   0x00000000      0x287 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
  .debug_macro   0x00000000      0x125 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_line    0x00000000      0x988 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_str     0x00000000    0xbe7e2 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_line    0x00000000      0x86b Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x00000000    0xbe7a9 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
  .comment       0x00000000       0x80 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
  .ARM.attributes
                 0x00000000       0x39 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
@@ -6533,7 +6533,7 @@ LOAD c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.15
                 0x000012bb       0x22 c:/ac6/systemworkbench/plugins/fr.ac6.mcu.externaltools.arm-none.win32_1.15.0.201708311556/tools/compiler/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(Ass-02-STM32.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x1ff7b
+.debug_info     0x00000000    0x1ff7c
  .debug_info    0x00000000     0x1a1a Drivers/BSP/ili9325.o
  .debug_info    0x00001a1a     0x1d6e Drivers/BSP/openx07v_c_lcd.o
  .debug_info    0x00003788     0x192c Drivers/BSP/touch_panel.o
@@ -6549,21 +6549,21 @@ OUTPUT(Ass-02-STM32.elf elf32-littlearm)
  .debug_info    0x0000e7a6     0x1e9a Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
  .debug_info    0x00010640     0x12c2 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
  .debug_info    0x00011902      0xd51 Src/Ass-02-Lib.o
- .debug_info    0x00012653     0x1b19 Src/Ass-02-Q01.o
- .debug_info    0x0001416c     0x123b Src/Ass-02-Q02.o
- .debug_info    0x000153a7      0xd9d Src/Ass-02.o
- .debug_info    0x00016144     0x129c Src/fsmc.o
- .debug_info    0x000173e0      0xf47 Src/gpio.o
- .debug_info    0x00018327     0x1c5f Src/main.o
- .debug_info    0x00019f86     0x1476 Src/spi.o
- .debug_info    0x0001b3fc      0xc6f Src/stm32f4xx_hal_msp.o
- .debug_info    0x0001c06b      0xeee Src/stm32f4xx_it.o
- .debug_info    0x0001cf59      0xff5 Src/syscalls.o
- .debug_info    0x0001df4e      0xd30 Src/system_stm32f4xx.o
- .debug_info    0x0001ec7e     0x1231 Src/usart.o
- .debug_info    0x0001feaf       0xcc startup/startup_stm32f407xx.o
+ .debug_info    0x00012653     0x1b53 Src/Ass-02-Q01.o
+ .debug_info    0x000141a6     0x123b Src/Ass-02-Q02.o
+ .debug_info    0x000153e1      0xd9d Src/Ass-02.o
+ .debug_info    0x0001617e     0x129c Src/fsmc.o
+ .debug_info    0x0001741a      0xf47 Src/gpio.o
+ .debug_info    0x00018361     0x1c5f Src/main.o
+ .debug_info    0x00019fc0     0x1476 Src/spi.o
+ .debug_info    0x0001b436      0xc6f Src/stm32f4xx_hal_msp.o
+ .debug_info    0x0001c0a5      0xeee Src/stm32f4xx_it.o
+ .debug_info    0x0001cf93      0xff5 Src/syscalls.o
+ .debug_info    0x0001df88      0xd30 Src/system_stm32f4xx.o
+ .debug_info    0x0001ecb8     0x1231 Src/usart.o
+ .debug_info    0x0001fee9       0x93 startup/startup_stm32f407xx.o
 
-.debug_abbrev   0x00000000     0x4d05
+.debug_abbrev   0x00000000     0x4d18
  .debug_abbrev  0x00000000      0x39a Drivers/BSP/ili9325.o
  .debug_abbrev  0x0000039a      0x4f5 Drivers/BSP/openx07v_c_lcd.o
  .debug_abbrev  0x0000088f      0x40c Drivers/BSP/touch_panel.o
@@ -6579,19 +6579,19 @@ OUTPUT(Ass-02-STM32.elf elf32-littlearm)
  .debug_abbrev  0x00002592      0x3d2 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
  .debug_abbrev  0x00002964      0x277 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
  .debug_abbrev  0x00002bdb      0x258 Src/Ass-02-Lib.o
- .debug_abbrev  0x00002e33      0x3b3 Src/Ass-02-Q01.o
- .debug_abbrev  0x000031e6      0x2bf Src/Ass-02-Q02.o
- .debug_abbrev  0x000034a5      0x21e Src/Ass-02.o
- .debug_abbrev  0x000036c3      0x2ad Src/fsmc.o
- .debug_abbrev  0x00003970      0x232 Src/gpio.o
- .debug_abbrev  0x00003ba2      0x2ae Src/main.o
- .debug_abbrev  0x00003e50      0x279 Src/spi.o
- .debug_abbrev  0x000040c9      0x20c Src/stm32f4xx_hal_msp.o
- .debug_abbrev  0x000042d5      0x25d Src/stm32f4xx_it.o
- .debug_abbrev  0x00004532      0x312 Src/syscalls.o
- .debug_abbrev  0x00004844      0x205 Src/system_stm32f4xx.o
- .debug_abbrev  0x00004a49      0x2aa Src/usart.o
- .debug_abbrev  0x00004cf3       0x12 startup/startup_stm32f407xx.o
+ .debug_abbrev  0x00002e33      0x3c6 Src/Ass-02-Q01.o
+ .debug_abbrev  0x000031f9      0x2bf Src/Ass-02-Q02.o
+ .debug_abbrev  0x000034b8      0x21e Src/Ass-02.o
+ .debug_abbrev  0x000036d6      0x2ad Src/fsmc.o
+ .debug_abbrev  0x00003983      0x232 Src/gpio.o
+ .debug_abbrev  0x00003bb5      0x2ae Src/main.o
+ .debug_abbrev  0x00003e63      0x279 Src/spi.o
+ .debug_abbrev  0x000040dc      0x20c Src/stm32f4xx_hal_msp.o
+ .debug_abbrev  0x000042e8      0x25d Src/stm32f4xx_it.o
+ .debug_abbrev  0x00004545      0x312 Src/syscalls.o
+ .debug_abbrev  0x00004857      0x205 Src/system_stm32f4xx.o
+ .debug_abbrev  0x00004a5c      0x2aa Src/usart.o
+ .debug_abbrev  0x00004d06       0x12 startup/startup_stm32f407xx.o
 
 .debug_loc      0x00000000     0x8268
  .debug_loc     0x00000000      0x655 Drivers/BSP/ili9325.o
@@ -6674,7 +6674,7 @@ OUTPUT(Ass-02-STM32.elf elf32-littlearm)
  .debug_aranges
                 0x00000c48       0x28 startup/startup_stm32f407xx.o
 
-.debug_ranges   0x00000000     0x1050
+.debug_ranges   0x00000000     0x1070
  .debug_ranges  0x00000000      0x168 Drivers/BSP/ili9325.o
  .debug_ranges  0x00000168      0x1a8 Drivers/BSP/openx07v_c_lcd.o
  .debug_ranges  0x00000310       0x68 Drivers/BSP/touch_panel.o
@@ -6688,19 +6688,19 @@ OUTPUT(Ass-02-STM32.elf elf32-littlearm)
  .debug_ranges  0x000009c8      0x178 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
  .debug_ranges  0x00000b40       0x98 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
  .debug_ranges  0x00000bd8       0x18 Src/Ass-02-Lib.o
- .debug_ranges  0x00000bf0      0x140 Src/Ass-02-Q01.o
- .debug_ranges  0x00000d30       0x70 Src/Ass-02-Q02.o
- .debug_ranges  0x00000da0       0x10 Src/Ass-02.o
- .debug_ranges  0x00000db0       0x70 Src/fsmc.o
- .debug_ranges  0x00000e20       0x40 Src/gpio.o
- .debug_ranges  0x00000e60       0x40 Src/main.o
- .debug_ranges  0x00000ea0       0x40 Src/spi.o
- .debug_ranges  0x00000ee0       0x10 Src/stm32f4xx_hal_msp.o
- .debug_ranges  0x00000ef0       0x40 Src/stm32f4xx_it.o
- .debug_ranges  0x00000f30       0xa0 Src/syscalls.o
- .debug_ranges  0x00000fd0       0x18 Src/system_stm32f4xx.o
- .debug_ranges  0x00000fe8       0x48 Src/usart.o
- .debug_ranges  0x00001030       0x20 startup/startup_stm32f407xx.o
+ .debug_ranges  0x00000bf0      0x160 Src/Ass-02-Q01.o
+ .debug_ranges  0x00000d50       0x70 Src/Ass-02-Q02.o
+ .debug_ranges  0x00000dc0       0x10 Src/Ass-02.o
+ .debug_ranges  0x00000dd0       0x70 Src/fsmc.o
+ .debug_ranges  0x00000e40       0x40 Src/gpio.o
+ .debug_ranges  0x00000e80       0x40 Src/main.o
+ .debug_ranges  0x00000ec0       0x40 Src/spi.o
+ .debug_ranges  0x00000f00       0x10 Src/stm32f4xx_hal_msp.o
+ .debug_ranges  0x00000f10       0x40 Src/stm32f4xx_it.o
+ .debug_ranges  0x00000f50       0xa0 Src/syscalls.o
+ .debug_ranges  0x00000ff0       0x18 Src/system_stm32f4xx.o
+ .debug_ranges  0x00001008       0x48 Src/usart.o
+ .debug_ranges  0x00001050       0x20 startup/startup_stm32f407xx.o
 
 .debug_macro    0x00000000    0x24c22
  .debug_macro   0x00000000      0x33d Drivers/BSP/ili9325.o
@@ -6818,91 +6818,91 @@ OUTPUT(Ass-02-STM32.elf elf32-littlearm)
  .debug_macro   0x000245c0      0x32a Src/system_stm32f4xx.o
  .debug_macro   0x000248ea      0x338 Src/usart.o
 
-.debug_line     0x00000000    0x12b5c
- .debug_line    0x00000000      0xc5d Drivers/BSP/ili9325.o
- .debug_line    0x00000c5d      0xe89 Drivers/BSP/openx07v_c_lcd.o
- .debug_line    0x00001ae6      0xbfe Drivers/BSP/touch_panel.o
- .debug_line    0x000026e4      0x2c8 Drivers/Fonts/font12.o
- .debug_line    0x000029ac      0x2c8 Drivers/Fonts/font24.o
- .debug_line    0x00002c74      0xb08 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_line    0x0000377c      0xb7c Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_line    0x000042f8      0xcb8 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
- .debug_line    0x00004fb0      0xb4e Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_line    0x00005afe      0xcea Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_line    0x000067e8     0x114b Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
- .debug_line    0x00007933      0xc2a Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.o
- .debug_line    0x0000855d     0x127e Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_line    0x000097db      0xbfc Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
- .debug_line    0x0000a3d7      0xb74 Src/Ass-02-Lib.o
- .debug_line    0x0000af4b      0xd98 Src/Ass-02-Q01.o
- .debug_line    0x0000bce3      0xc17 Src/Ass-02-Q02.o
- .debug_line    0x0000c8fa      0xb56 Src/Ass-02.o
- .debug_line    0x0000d450      0xa27 Src/fsmc.o
- .debug_line    0x0000de77      0xa0a Src/gpio.o
- .debug_line    0x0000e881      0xbd0 Src/main.o
- .debug_line    0x0000f451      0x9d4 Src/spi.o
- .debug_line    0x0000fe25      0x981 Src/stm32f4xx_hal_msp.o
- .debug_line    0x000107a6      0x9ea Src/stm32f4xx_it.o
- .debug_line    0x00011190      0x5b7 Src/syscalls.o
- .debug_line    0x00011747      0x9ab Src/system_stm32f4xx.o
- .debug_line    0x000120f2      0x9eb Src/usart.o
- .debug_line    0x00012add       0x7f startup/startup_stm32f407xx.o
+.debug_line     0x00000000    0x10e6e
+ .debug_line    0x00000000      0xb40 Drivers/BSP/ili9325.o
+ .debug_line    0x00000b40      0xd6c Drivers/BSP/openx07v_c_lcd.o
+ .debug_line    0x000018ac      0xae1 Drivers/BSP/touch_panel.o
+ .debug_line    0x0000238d      0x2c8 Drivers/Fonts/font12.o
+ .debug_line    0x00002655      0x2c8 Drivers/Fonts/font24.o
+ .debug_line    0x0000291d      0x9eb Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_line    0x00003308      0xa5f Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_line    0x00003d67      0xb9b Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+ .debug_line    0x00004902      0xa31 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_line    0x00005333      0xbcd Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_line    0x00005f00     0x102e Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
+ .debug_line    0x00006f2e      0xb0d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.o
+ .debug_line    0x00007a3b     0x1161 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_line    0x00008b9c      0xadf Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
+ .debug_line    0x0000967b      0x9e5 Src/Ass-02-Lib.o
+ .debug_line    0x0000a060      0xc0d Src/Ass-02-Q01.o
+ .debug_line    0x0000ac6d      0xa88 Src/Ass-02-Q02.o
+ .debug_line    0x0000b6f5      0x9c7 Src/Ass-02.o
+ .debug_line    0x0000c0bc      0x90a Src/fsmc.o
+ .debug_line    0x0000c9c6      0x8ed Src/gpio.o
+ .debug_line    0x0000d2b3      0xa41 Src/main.o
+ .debug_line    0x0000dcf4      0x8b7 Src/spi.o
+ .debug_line    0x0000e5ab      0x864 Src/stm32f4xx_hal_msp.o
+ .debug_line    0x0000ee0f      0x8cd Src/stm32f4xx_it.o
+ .debug_line    0x0000f6dc      0x5b7 Src/syscalls.o
+ .debug_line    0x0000fc93      0x88e Src/system_stm32f4xx.o
+ .debug_line    0x00010521      0x8ce Src/usart.o
+ .debug_line    0x00010def       0x7f startup/startup_stm32f407xx.o
 
-.debug_str      0x00000000    0xc3e14
- .debug_str     0x00000000    0xbeeba Drivers/BSP/ili9325.o
-                              0xbf28a (size before relaxing)
- .debug_str     0x000beeba      0x7bf Drivers/BSP/openx07v_c_lcd.o
-                              0xbf8b3 (size before relaxing)
- .debug_str     0x000bf679      0x724 Drivers/BSP/touch_panel.o
-                              0xbfc33 (size before relaxing)
- .debug_str     0x000bfd9d       0x27 Drivers/Fonts/font12.o
-                               0x35c5 (size before relaxing)
- .debug_str     0x000bfdc4       0x27 Drivers/Fonts/font24.o
-                               0x35c5 (size before relaxing)
- .debug_str     0x000bfdeb      0xb8d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
-                              0xbf43c (size before relaxing)
- .debug_str     0x000c0978      0x370 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
-                              0xbf1d3 (size before relaxing)
- .debug_str     0x000c0ce8      0x32d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
-                              0xbed93 (size before relaxing)
- .debug_str     0x000c1015      0x271 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
-                              0xbec06 (size before relaxing)
- .debug_str     0x000c1286      0x39d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
-                              0xbed94 (size before relaxing)
- .debug_str     0x000c1623      0x462 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
-                              0xbf0f4 (size before relaxing)
- .debug_str     0x000c1a85      0x3b2 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.o
-                              0xbef25 (size before relaxing)
- .debug_str     0x000c1e37      0x686 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
-                              0xbf1eb (size before relaxing)
- .debug_str     0x000c24bd      0x105 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
-                              0xbed3f (size before relaxing)
- .debug_str     0x000c25c2      0x244 Src/Ass-02-Lib.o
-                              0xbf80f (size before relaxing)
- .debug_str     0x000c2806      0x19b Src/Ass-02-Q01.o
-                              0xbfdbb (size before relaxing)
- .debug_str     0x000c29a1      0x120 Src/Ass-02-Q02.o
-                              0xbfa05 (size before relaxing)
- .debug_str     0x000c2ac1       0x1c Src/Ass-02.o
-                              0xbf81b (size before relaxing)
- .debug_str     0x000c2add       0x97 Src/fsmc.o
-                              0xbeeca (size before relaxing)
- .debug_str     0x000c2b74       0x1b Src/gpio.o
-                              0xbe98c (size before relaxing)
- .debug_str     0x000c2b8f       0x4f Src/main.o
-                              0xc06f1 (size before relaxing)
- .debug_str     0x000c2bde       0x17 Src/spi.o
-                              0xbf319 (size before relaxing)
- .debug_str     0x000c2bf5       0x1b Src/stm32f4xx_hal_msp.o
-                              0xbece5 (size before relaxing)
- .debug_str     0x000c2c10       0xc8 Src/stm32f4xx_it.o
-                              0xbecd3 (size before relaxing)
- .debug_str     0x000c2cd8     0x10c8 Src/syscalls.o
-                               0x7dd5 (size before relaxing)
- .debug_str     0x000c3da0       0x5a Src/system_stm32f4xx.o
-                              0xbe962 (size before relaxing)
- .debug_str     0x000c3dfa       0x1a Src/usart.o
-                              0xbee18 (size before relaxing)
+.debug_str      0x00000000    0xc3de9
+ .debug_str     0x00000000    0xbee81 Drivers/BSP/ili9325.o
+                              0xbf251 (size before relaxing)
+ .debug_str     0x000bee81      0x7bf Drivers/BSP/openx07v_c_lcd.o
+                              0xbf87a (size before relaxing)
+ .debug_str     0x000bf640      0x724 Drivers/BSP/touch_panel.o
+                              0xbfbfa (size before relaxing)
+ .debug_str     0x000bfd64       0x27 Drivers/Fonts/font12.o
+                               0x358c (size before relaxing)
+ .debug_str     0x000bfd8b       0x27 Drivers/Fonts/font24.o
+                               0x358c (size before relaxing)
+ .debug_str     0x000bfdb2      0xb8d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+                              0xbf403 (size before relaxing)
+ .debug_str     0x000c093f      0x370 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+                              0xbf19a (size before relaxing)
+ .debug_str     0x000c0caf      0x32d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+                              0xbed5a (size before relaxing)
+ .debug_str     0x000c0fdc      0x271 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+                              0xbebcd (size before relaxing)
+ .debug_str     0x000c124d      0x39d Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+                              0xbed5b (size before relaxing)
+ .debug_str     0x000c15ea      0x462 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
+                              0xbf0bb (size before relaxing)
+ .debug_str     0x000c1a4c      0x3b2 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.o
+                              0xbeeec (size before relaxing)
+ .debug_str     0x000c1dfe      0x686 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+                              0xbf1b2 (size before relaxing)
+ .debug_str     0x000c2484      0x105 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.o
+                              0xbed06 (size before relaxing)
+ .debug_str     0x000c2589      0x244 Src/Ass-02-Lib.o
+                              0xbf7d6 (size before relaxing)
+ .debug_str     0x000c27cd      0x1a9 Src/Ass-02-Q01.o
+                              0xbfd90 (size before relaxing)
+ .debug_str     0x000c2976      0x120 Src/Ass-02-Q02.o
+                              0xbf9cc (size before relaxing)
+ .debug_str     0x000c2a96       0x1c Src/Ass-02.o
+                              0xbf7e2 (size before relaxing)
+ .debug_str     0x000c2ab2       0x97 Src/fsmc.o
+                              0xbee91 (size before relaxing)
+ .debug_str     0x000c2b49       0x1b Src/gpio.o
+                              0xbe953 (size before relaxing)
+ .debug_str     0x000c2b64       0x4f Src/main.o
+                              0xc06b8 (size before relaxing)
+ .debug_str     0x000c2bb3       0x17 Src/spi.o
+                              0xbf2e0 (size before relaxing)
+ .debug_str     0x000c2bca       0x1b Src/stm32f4xx_hal_msp.o
+                              0xbecac (size before relaxing)
+ .debug_str     0x000c2be5       0xc8 Src/stm32f4xx_it.o
+                              0xbec9a (size before relaxing)
+ .debug_str     0x000c2cad     0x10c8 Src/syscalls.o
+                               0x7d9c (size before relaxing)
+ .debug_str     0x000c3d75       0x5a Src/system_stm32f4xx.o
+                              0xbe929 (size before relaxing)
+ .debug_str     0x000c3dcf       0x1a Src/usart.o
+                              0xbeddf (size before relaxing)
 
 .comment        0x00000000       0x7f
  .comment       0x00000000       0x7f Drivers/BSP/ili9325.o
