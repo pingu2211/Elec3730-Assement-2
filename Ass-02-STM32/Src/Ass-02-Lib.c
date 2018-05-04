@@ -10,7 +10,7 @@
 
 // STEPIEN: Added two touch panel functions to make the interface more
 //          consistent with the LCD BSP.
-bool USR_DBG = true;
+bool USR_DBG = false;
 #ifdef STM32F407xx
 uint8_t BSP_TP_Init(void)
 {
@@ -19,6 +19,7 @@ uint8_t BSP_TP_Init(void)
   TouchPanel_Calibrate();
   return 0;
 }
+
 
 uint8_t BSP_TP_GetDisplayPoint(Coordinate *pDisplay)
 {
@@ -32,7 +33,7 @@ uint8_t BSP_TP_GetDisplayPoint(Coordinate *pDisplay)
   if (getDisplayPoint(pDisplay, pScreen, &matrix ) == DISABLE)
   {
 	printf("Error in LCD\n");
-    return 1; // Error in LCD
+    return -1; // Error in LCD
   }
   return 0;
 }

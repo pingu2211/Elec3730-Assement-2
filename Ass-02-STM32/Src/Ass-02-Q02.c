@@ -100,7 +100,6 @@ void CalculatorInit(void)
 
 void CalculatorProcess(void)
 {
-  USR_DBG=true;
   int state = BSP_TP_GetDisplayPoint(&display);
   if (state == 0){
 	  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_SET); // Toggle LED4

@@ -8,8 +8,37 @@
 #endif
 #include <stdbool.h>
 #include "calculator.h"
-enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
 
+enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
+int8_t help(char *args[], uint8_t count);
+
+typedef struct{
+int8_t *Command_string; 										// Command string
+int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);	// Function pointer				//
+int8_t *Help_s; 													// Help information
+} command_s;
+
+
+const command_s CommandList[] = {
+{"add", &add, 		"add <num 1> .. <num N>"},
+{"sub", &subtract, 	"sub <num 1> <num 2>"},
+{"mul", &multiply, 	"mul <num 1> .. <num N>"},
+{"div", &divide, 	"div <num 1> <num 2>"},
+{"debug", &debug,	"Togggles debug messages (Optional arg <on|off>)"},
+{NULL, NULL, NULL}
+};
+
+
+int8_t help(char *args[], uint8_t count){
+	if (USR_DBG)printf("%s\n",args[0]);
+		char **Args = &args[1];
+		for (int i=0;CommandList[i].Command_string!=NULL;i++){
+			if(strcmp(CommandList[i].Command_string,args[0])==0){
+				printf("\%s\n",CommandList[i].Help_s);
+			}
+		}
+		return 0;
+}
 
 int string_parser (char *inp, char **array_of_words_p[]) {
 	int word_count=0;
@@ -82,26 +111,13 @@ void CommandLineParserInit(void)
   printf("Command Line Parser Example\n");
 }
 
-typedef struct{
-int8_t *Command_string; 										// Command string
-int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);	// Function pointer				//
-int8_t *Help_s; 													// Help information
-} command_s;
-
-const command_s CommandList[] = {
-{"add", &add, 		"add <num 1> .. <num N>"},
-{"sub", &subtract, 	"sub <num 1> <num 2>"},
-{"mul", &multiply, 	"mul <num 1> .. <num N>"},
-{"div", &divide, 	"div <num 1> <num 2>"},
-{NULL, NULL, NULL}
-};
 
 int Command_Function(int num_count, char **Array_numbers){
-	printf("%s\n",Array_numbers[0]);
+	if (USR_DBG)printf("%s\n",Array_numbers[0]);
 	char **Args = &Array_numbers[1];
-
 	for (int i=0;CommandList[i].Command_string!=NULL;i++){
 		if(strcmp(CommandList[i].Command_string,Array_numbers[0])==0){
+			if (USR_DBG)printf("first arg = %s\n",Args[0]);
 			CommandList[i].Function_p(Args,num_count-1);
 		}
 	}
@@ -128,25 +144,25 @@ void CommandLineParserProcess(void)
 		case CR :			// case 1: if user presses "enter"
 			printf("\n");
 			// add \0 to the end of the string and then give it to q3 of assesment 1
-			if (_count>1){
+			if (_count>0){
 				input_s[_count] = '\0';	// add \0 to the end of the string
 				wordcount = string_parser (input_s, &words);
 				Command_Function(wordcount, words);
 				if(USR_DBG)printf("%s\n",input_s);
-				free(input_s);
 				_count = 0;
 			}
 			break;
 		case DEL:			// case 2: if user presses "backspace"
 			printf("\b");
 			_count--;		// subtract 1 from count
-
 			break;
 
 		default:				// when a control character is entered that is NOT enter or backspace
 			printf(" %i ",c);	// print the askii number of the control character that was entered
 		}
 	}
+<<<<<<< HEAD
+=======
 
 	int string_parser(char *array_of_inputs, char **array_of_strings_p[])
 	{
@@ -274,6 +290,7 @@ int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]){
 }
 
 
+>>>>>>> c8f81c278fd242f328a6df4eba2b34543235de43
   }
 
 #else
