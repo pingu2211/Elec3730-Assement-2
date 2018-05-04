@@ -147,8 +147,7 @@ void CommandLineParserProcess(void)
 			printf(" %i ",c);	// print the askii number of the control character that was entered
 		}
 	}
-<<<<<<< HEAD
-=======
+
 	int string_parser(char *array_of_inputs, char **array_of_strings_p[])
 	{
 		/* declare all the things */
@@ -219,28 +218,43 @@ void CommandLineParserProcess(void)
 
 	}
 
-	//new string passer function - Will's edit
-	int string_passer(char *array_of_inputs, char **array_of_strings_p[])
+	//new string passer 2 function - Will's edit
+	int string_passer(char *input_string, char **array_of_strings_p[])
 		{
 			 	 	 	 	 	 	 	 	// declare all the things
 				int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
 				int j = 0;					// j keeps track of how long the current word is
 				char **array_of_strings;	// pointer to array or input strings
+				char *command;				// pointer to command string
 
-				int input_length = strlen (array_of_inputs);			// make sure the input string actually has something in it
+				int input_length = strlen (input_string);			// make sure the input string actually has something in it
 				if (input_length <= 0) return -1;						// if input is empty return error
 
-				array_of_strings = (char**)malloc(sizeof( *array_of_strings) * input_length);	// allocate some memory, for now we'll assume ever character is its own word and trim it down later
-					if (!array_of_strings) {														//make sure  memory was allocated successfully
-						printf ("\nError in String Passer\nError reallocating memory");
-							return -1;
-					}
+				for (int i=0; i<input_length; i++){
+/*					array_of_strings = (char**)malloc(sizeof( *array_of_strings) * input_length);	// allocate some memory, for now we'll assume ever character is its own word and trim it down later
+						if (!array_of_strings) {														//make sure  memory was allocated successfully
+							printf ("\nError in String Passer\nError reallocating memory");
+								return -1;*/
+						if (input_string[i]==' '){
+							input_string[i] = NULL;
+						}
+						if (i==0){
+							array_of_strings[0]=&input_string[i];
 
+						}
+						else if(input_string[i-1]==NULL){
+							array_of_strings[inp_count]=&input_string[i];
+							inp_count++;
+						}
+
+				return *array_of_strings;
+				}
 
   }
 
+/*
 //checking the input
-int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
+int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]){
 	typedef struct{
 	int8_t *Command_string; 										// Command string
 	int8_t (*Function_p)(uint8_t num_count, uint8_t *numbers_p[]);	// Function pointer				//
@@ -255,11 +269,12 @@ int8_t Command_Function(uint8_t num_count, uint8_t *Array_numbers[]);{
 	{NULL, NULL, NULL}
 	};
 	//printf(%d,&result);
+*/
 
 
 }
 
->>>>>>> 05fa5366235eb5c5caedcc66590e1368fc66e291
+
   }
 
 #else
