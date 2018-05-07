@@ -179,32 +179,25 @@ int string_parser(char *input_string, char **array_of_strings[])
 	{
 		 	 	 	 	 	 	 	 	// declare all the things
 			int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
-/*				int j = 0;					// j keeps track of how long the current word is*/
-			//char **array_of_strings;	// pointer to array or input strings
-
 			int input_length = strlen (input_string);			// make sure the input string actually has something in it
-			if (input_length <= 0) return -1;						// if input is empty return error
-
+			if (input_length <= 0) return 0;					// if input is empty return error
 			for (int i=0; i<input_length; i++){
-/*					array_of_strings = (char**)malloc(sizeof( *array_of_strings) * input_length);	// allocate some memory, for now we'll assume ever character is its own word and trim it down later
-					if (!array_of_strings) {														//make sure  memory was allocated successfully
-						printf ("\nError in String Passer\nError reallocating memory");
-							return -1;*/
 					if (input_string[i]==' '){
-						input_string[i] = NULL;
+						input_string[i] = '\0';
 					}
-					if (i==0){
-						array_of_strings[0]=&input_string[i];
 
+					if (i==0){
+						*array_of_strings[input_length]=&input_string[i];
+						input_length++;
 					}
-					else if(input_string[i-1]==NULL){
-						array_of_strings[inp_count]=&input_string[i];
+					else if(input_string[i-1]=='\0'&&input_string[i]!=' '){
+						*array_of_strings[inp_count]=&input_string[i];
 						inp_count++;
 					}
 
 
 			}
-		return 0;
+		return inp_count;
 }
 
 

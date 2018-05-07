@@ -10,7 +10,7 @@
 
 // STEPIEN: Added two touch panel functions to make the interface more
 //          consistent with the LCD BSP.
-bool USR_DBG = false;
+bool USR_DBG = true;
 #ifdef STM32F407xx
 uint8_t BSP_TP_Init(void)
 {
