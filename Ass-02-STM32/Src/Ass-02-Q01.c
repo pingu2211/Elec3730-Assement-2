@@ -41,7 +41,7 @@ int8_t help(char *args[], uint8_t count){
 		return 0;
 }
 
-int string_parser2 (char *inp, char **array_of_words_p[]) {
+/*int string_parser2 (char *inp, char **array_of_words_p[]) {
 	int word_count=0;
 	int j = 0;
 	int input_lenght = strlen (inp);
@@ -92,7 +92,7 @@ int string_parser2 (char *inp, char **array_of_words_p[]) {
 	*array_of_words_p = array_of_words;
 	if (USR_DBG)printf ("WordCount = %d\n", word_count);
 	return word_count;
-}
+}*/
 
 int isControlChar(char c){
 	if (c<32||c==127) return true;
