@@ -7,15 +7,16 @@
 #define MOVEMENT_THRESHOLD 10
 #define ygrid 240/5-1
 #define xgrid 60
-#define BUTTONS_COUNT 16
+#define BUTTONS_COUNT 17
 #define FILL_COLOUR	0xFFFF
 #define ALT_COLOUR	0x9CB2
 #define TEXT_COLOUR 0x127C
 
 bool KEY_DOWN;
 
+
 typedef struct button{
-	char* ID;
+	char ID;
 	uint16_t x, y ,width, hight;
 	char * text;
 	uint16_t fillColour;
@@ -46,7 +47,6 @@ void button_press(struct button B){
 
 bool is_pressed(struct button B,Coordinate *point){
 	if (point->x > B.x && point->x < B.x+B.width && point->y > B.y && point->y < B.y+B.hight) return true;
-
 	else return false;
 }
 
@@ -57,26 +57,58 @@ int dist(Coordinate N1, Coordinate N2){
 }
 
 struct button buttons[BUTTONS_COUNT]={
-		{"0",0*xgrid,4*ygrid,3*xgrid,ygrid,"0",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"1",0*xgrid,1*ygrid,xgrid,ygrid,"1",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"2",1*xgrid,1*ygrid,xgrid,ygrid,"2",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"3",2*xgrid,1*ygrid,xgrid,ygrid,"3",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"4",0*xgrid,2*ygrid,xgrid,ygrid,"4",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"5",1*xgrid,2*ygrid,xgrid,ygrid,"5",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"6",2*xgrid,2*ygrid,xgrid,ygrid,"6",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"7",0*xgrid,3*ygrid,xgrid,ygrid,"7",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"8",1*xgrid,3*ygrid,xgrid,ygrid,"8",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"9",2*xgrid,3*ygrid,xgrid,ygrid,"9",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"+",3*xgrid,1*ygrid,xgrid,ygrid,"+",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"-",3*xgrid,2*ygrid,xgrid,ygrid,"-",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{".",3*xgrid,3*ygrid,xgrid,ygrid,".",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"=",3*xgrid,4*ygrid,xgrid,ygrid,"=",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"*",4*xgrid,1*ygrid,xgrid,ygrid,"*",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"/",4*xgrid,2*ygrid,xgrid,ygrid,"/",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-
-
-
+		{'0',0*xgrid,4*ygrid,3*xgrid,ygrid,"0",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'1',0*xgrid,1*ygrid,xgrid,ygrid,"1",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'2',1*xgrid,1*ygrid,xgrid,ygrid,"2",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'3',2*xgrid,1*ygrid,xgrid,ygrid,"3",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'4',0*xgrid,2*ygrid,xgrid,ygrid,"4",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'5',1*xgrid,2*ygrid,xgrid,ygrid,"5",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'6',2*xgrid,2*ygrid,xgrid,ygrid,"6",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'7',0*xgrid,3*ygrid,xgrid,ygrid,"7",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'8',1*xgrid,3*ygrid,xgrid,ygrid,"8",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'9',2*xgrid,3*ygrid,xgrid,ygrid,"9",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'+',3*xgrid,1*ygrid,xgrid,ygrid,"+",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'-',3*xgrid,2*ygrid,xgrid,ygrid,"-",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'.',3*xgrid,3*ygrid,xgrid,ygrid,".",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'=',3*xgrid,4*ygrid,xgrid,ygrid,"=",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'*',4*xgrid,1*ygrid,xgrid,ygrid,"*",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'/',4*xgrid,2*ygrid,xgrid,ygrid,"/",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{'C',4*xgrid,3*ygrid,xgrid,ygrid,"C",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR}
 };
+
+int itt = 0;
+char * opperands[2] = {'\0','\0'};
+
+void button_pressed(struct button key){
+	switch (key.ID){
+	case 'C':
+		opperands[itt]="";
+		break;
+	case '+':
+	case '-':
+	case '/':
+	case '*':
+		break;
+	case '0':
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '5':
+	case '6':
+	case '7':
+	case '8':
+	case '9':
+		strcat(opperands[itt],key.ID);
+		break;
+	case '.':
+		if (strchr(opperands[itt],'.')==NULL){
+			strcat(opperands[itt],key.ID);
+		}
+		break;
+	}
+	if(USR_DBG)printf("\n%s\n",opperands[itt]);
+}
 
 Coordinate last;
 
@@ -97,17 +129,19 @@ void CalculatorInit(void)
 	  button_show(buttons[i]);
   }
 }
-
+int debounce = 0;
 void CalculatorProcess(void)
 {
   int state = BSP_TP_GetDisplayPoint(&display);
   if (state == 0){
+	  debounce = 0;
 	  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_SET); // Toggle LED4
 	  if (!KEY_DOWN){
 		  if (USR_DBG) printf("TOUCH GOT (%i,%i)\n",display.x,display.y);
 			for (int i=0;i<BUTTONS_COUNT;i++){
 				  if (is_pressed(buttons[i],&display)){
 					  if (USR_DBG) printf("%s PRESSED (%i,%i)",buttons[i].ID,display.x,display.y);
+					  printf("%s\n",buttons[i].ID);
 					  button_press(buttons[i]);
 					  KEY_DOWN=true;
 				  }else{
@@ -116,8 +150,11 @@ void CalculatorProcess(void)
 	  	  }
 	  }
   }else{
-	  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_RESET);
-	  KEY_DOWN=false;
+	  if (debounce++ > 30){
+		  KEY_DOWN=false;
+		  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_RESET);
+	  }
+
   }
   last = display;
 }

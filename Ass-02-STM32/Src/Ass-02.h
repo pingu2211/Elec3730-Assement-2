@@ -34,6 +34,7 @@ extern void Ass_02_Main(void);
 extern void CommandLineParserInit(void);
 extern void CommandLineParserProcess(void);
 bool USR_DBG;
+int _MOVEMENT_THRESHOLD;
 
 // Question 2
 extern void CalculatorInit(void);

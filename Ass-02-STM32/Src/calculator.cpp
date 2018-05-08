@@ -105,6 +105,13 @@ int8_t debug(char *args[], uint8_t count){
 }
 
 
+int8_t threshold(char *args[], uint8_t count){
+	if(count == 0)printf("current threshold %i", _MOVEMENT_THRESHOLD);
+	else if(count == 1){
+		_MOVEMENT_THRESHOLD = atoi(args[0]);
+	}
+
+}
 
 
 
