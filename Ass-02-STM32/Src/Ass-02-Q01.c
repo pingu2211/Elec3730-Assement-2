@@ -26,6 +26,7 @@ const command_s CommandList[] = {
 {"mul", &multiply, 	"mul <num 1> .. <num N>"},
 {"div", &divide, 	"div <num 1> <num 2>"},
 {"debug", &debug,	"Togggles debug messages (Optional arg <on|off>)"},
+{"threshold",&threshold, "Ajusts the movement threshold for the touch screen"},
 {NULL, NULL, NULL}
 };
 
@@ -41,7 +42,11 @@ int8_t help(char *args[], uint8_t count){
 		return 0;
 }
 
+<<<<<<< HEAD
 /*int string_parser2 (char *inp, char **array_of_words_p[]) {
+=======
+int string_parser (char *inp, char **array_of_words_p[]) {
+>>>>>>> 3696a74a3131e8dd6c76137fb058e939147580bf
 	int word_count=0;
 	int j = 0;
 	int input_lenght = strlen (inp);
@@ -99,7 +104,6 @@ int isControlChar(char c){
 	else return false;
 }
 
-
 int _count=0;
 char *input_s; // array which stores the characters
 char **words;
@@ -112,7 +116,6 @@ void CommandLineParserInit(void)
   printf("Command Line Parser Example\n");
 }
 
-
 int Command_Function(int num_count, char **Array_numbers){
 	if (USR_DBG)printf("%s\n",Array_numbers[0]);
 	char **Args = &Array_numbers[1];
@@ -124,7 +127,6 @@ int Command_Function(int num_count, char **Array_numbers){
 	}
 	return 0;
 }
-
 
 void CommandLineParserProcess(void)
 {
@@ -159,7 +161,7 @@ void CommandLineParserProcess(void)
 			break;
 
 		default:				// when a control character is entered that is NOT enter or backspace
-			printf(" %i ",c);	// print the askii number of the control character that was entered
+			printf(" %i ",c);	// print the ascii number of the control character that was entered
 		}
 	}
 
@@ -175,36 +177,26 @@ void CommandLineParserProcess(void)
 }
 
 
-int string_parser(char *input_string, char **array_of_strings[])
+int string_parser2(char *input_string, char **array_of_strings[])
 	{
 		 	 	 	 	 	 	 	 	// declare all the things
 			int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
-/*				int j = 0;					// j keeps track of how long the current word is*/
-			//char **array_of_strings;	// pointer to array or input strings
-
 			int input_length = strlen (input_string);			// make sure the input string actually has something in it
-			if (input_length <= 0) return -1;						// if input is empty return error
-
+			if (input_length <= 0) return 0;					// if input is empty return error
 			for (int i=0; i<input_length; i++){
-/*					array_of_strings = (char**)malloc(sizeof( *array_of_strings) * input_length);	// allocate some memory, for now we'll assume ever character is its own word and trim it down later
-					if (!array_of_strings) {														//make sure  memory was allocated successfully
-						printf ("\nError in String Passer\nError reallocating memory");
-							return -1;*/
 					if (input_string[i]==' '){
-						input_string[i] = NULL;
+						input_string[i] = '\0';
 					}
 					if (i==0){
-						array_of_strings[0]=&input_string[i];
-
+						*array_of_strings[input_length]=&input_string[i];
+						inp_count++;
 					}
-					else if(input_string[i-1]==NULL){
+					else if(input_string[i-1]=='\0'&&input_string[i]!=' '){
 						array_of_strings[inp_count]=&input_string[i];
 						inp_count++;
 					}
-
-
 			}
-		return 0;
+		return inp_count;
 }
 
 

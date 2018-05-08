@@ -4,7 +4,7 @@
 
 bool isNumber(char * str){
 	for (int i=0;i<strlen(str);i++){
-		if ( (str[i] < 48 || str[i] >57)&&(str[i]==45||str[i]==46) ){
+		if ( (str[i] < 48 || str[i] >57)&&!(str[i]==45||str[i]==46) ){
 			if (USR_DBG)printf("is not a number\n");
 			return false;
 		}
@@ -105,6 +105,13 @@ int8_t debug(char *args[], uint8_t count){
 }
 
 
+int8_t threshold(char *args[], uint8_t count){
+	if(count == 0)printf("current threshold %i", _MOVEMENT_THRESHOLD);
+	else if(count == 1){
+		_MOVEMENT_THRESHOLD = atoi(args[0]);
+	}
+
+}
 
 
 
