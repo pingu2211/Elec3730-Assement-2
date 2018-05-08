@@ -15,12 +15,13 @@ int string_parser (char *input_string, char **array_of_strings[]);
 
 
 typedef struct{
-int8_t *Command_string; 										// Command string
-int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);	// Function pointer				//
+int8_t *Command_string; 											// Command string
+int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);		// Function pointer				//
 int8_t *Help_s; 													// Help information
 } command_s;
 
 
+<<<<<<< HEAD
 const command_s CommandList[] = {
 {"add", &add, 		"add <num 1> .. <num N>"},
 {"sub", &subtract, 	"sub <num 1> <num 2>"},
@@ -29,20 +30,42 @@ const command_s CommandList[] = {
 {"debug", &debug,	"Togggles debug messages (Optional arg <on|off>)"},
 {"help",&help, "help <command>"},
 {NULL, NULL, NULL}
+=======
+const command_s CommandList[] = {												// structure holding list of commands and their help displays.
+{"add", 		&add, 		"add <num 1> .. <num N>"},							// addition function
+{"sub", 		&subtract, 	"subtract <num 1> <num 2>"},						// subtraction function
+{"mul", 		&multiply, 	"multiply <num 1> .. <num N>"},						// multiplication function
+{"div", 		&divide, 	"divide <num 1> <num 2>"},							// division function
+{"debug", 		&debug,		"Togggles debug messages (Optional arg <on|off>)"},	// debug messages on and off
+{NULL, 			NULL, 		NULL}
+>>>>>>> 2f9aac58035703163c69724d2a1d6d8e8332d467
 };
 
 
-int8_t help(char *args[], uint8_t count){
+int8_t help(char *args[], uint8_t count){ 		// help function to display command help messages
 	if (USR_DBG)printf("%s\n",args[0]);
+<<<<<<< HEAD
 		for (int i=0;CommandList[i].Command_string!=NULL;i++){
+=======
+		char **Args = &args[1];
+		for (int i=0;CommandList[i].Command_string!=NULL;i++){  	// compare the help command
+>>>>>>> 2f9aac58035703163c69724d2a1d6d8e8332d467
 			if(strcmp(CommandList[i].Command_string,args[0])==0){
 				printf("\%s\n",CommandList[i].Help_s);
+			}
+			if (count==0){												// when user types 'help' and no command
+				for (int h=0;CommandList[h].Command_string!=NULL;h++)
+				printf("\%s\n",CommandList[h].Help_s);					// print ALL command help messages
 			}
 		}
 		return 0;
 }
 
+
+/*int string_parser2 (char *inp, char **array_of_words_p[]) {
+=======
 int string_parser (char *inp, char **array_of_words_p[]) {
+>>>>>>> 3696a74a3131e8dd6c76137fb058e939147580bf
 	int word_count=0;
 	int j = 0;
 	int input_lenght = strlen (inp);
@@ -93,16 +116,16 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 	*array_of_words_p = array_of_words;
 	if (USR_DBG)printf ("WordCount = %d\n", word_count);
 	return word_count;
+}*/
+
+int isControlChar(char c){				// checks input character against the ascii table
+	if (c<32||c==127) return true;		// returns true if input is a valid character
+	else return false;					// valid characters are 32-127 on ascii table
 }
 
-int isControlChar(char c){
-	if (c<32||c==127) return true;
-	else return false;
-}
-
-int _count=0;
-char *input_s; // array which stores the characters
-char **words;
+int _count=0;	// universal counter
+char *input_s; 	// array which stores the characters
+char **words;	// pointer to array of strings
 
 void CommandLineParserInit(void)
 {
@@ -112,13 +135,13 @@ void CommandLineParserInit(void)
   printf("Command Line Parser Example\n");
 }
 
-int Command_Function(int num_count, char **Array_numbers){
-	if (USR_DBG)printf("%s\n",Array_numbers[0]);
+int Command_Function(int num_count, char **Array_numbers){				// function takes input from user and compares the command with list of commands
+	if (USR_DBG)printf("%s\n",Array_numbers[0]);						// each command references a particular function (add, multiply, etc.)
 	char **Args = &Array_numbers[1];
 	for (int i=0;CommandList[i].Command_string!=NULL;i++){
-		if(strcmp(CommandList[i].Command_string,Array_numbers[0])==0){
-			if (USR_DBG)printf("first arg = %s\n",Args[0]);
-			CommandList[i].Function_p(Args,num_count-1);
+		if(strcmp(CommandList[i].Command_string,Array_numbers[0])==0){	// compare input string to command list
+			if (USR_DBG)printf("first arg = %s\n",Args[0]);				// implemented debug messages
+			CommandList[i].Function_p(Args,num_count-1);				// reference to function the user has entered.
 		}
 	}
 	return 0;
@@ -132,22 +155,21 @@ void CommandLineParserProcess(void)
 #ifdef STM32F407xx
   if (HAL_UART_Receive(&huart2, &c, 1, 0x0) == HAL_OK) //Receive a new character and store in c
   {
-	HAL_GPIO_TogglePin(GPIOD, LD4_Pin); 				// Toggle LED4
-	if (!isControlChar(c)){			// check that user entered a character and not a control character
+	HAL_GPIO_TogglePin(GPIOD, LD4_Pin); 		// Toggle LED4
+	if (!isControlChar(c)){						// check that user entered a character and not a control character
 		input_s=realloc(input_s, _count+1);
 		printf("%c", c);
-		input_s[_count]=c;	// store in the next element of array
-		_count++;					// increase counter by 1
+		input_s[_count]=c;						// store in the next element of array
+		_count++;								// increase counter by 1
 	} else {
 		switch (c){
-		case CR :			// case 1: if user presses "enter"
+		case CR :												// case 1: if user presses "enter"
 			printf("\n");
-			// add \0 to the end of the string and then give it to q3 of assesment 1
 			if (_count>0){
-				input_s[_count] = '\0';	// add \0 to the end of the string
-				wordcount = string_parser (input_s, &words);
+				input_s[_count] = '\0';							// add \0 to the end of the string
+				wordcount = string_parser2 (input_s, &words); 	// call string parser function
 				Command_Function(wordcount, words);
-				if(USR_DBG)printf("%s\n",input_s);
+				if(USR_DBG)printf("%s\n",input_s);				// prints debug messages
 				_count = 0;
 			}
 			break;
@@ -160,9 +182,6 @@ void CommandLineParserProcess(void)
 			printf(" %i ",c);	// print the ascii number of the control character that was entered
 		}
 	}
-
-	//new string passer 2 function - Will's edit
-
 }
 
 
@@ -175,22 +194,21 @@ void CommandLineParserProcess(void)
 
 int string_parser2(char *input_string, char **array_of_strings[])
 	{
-		 	 	 	 	 	 	 	 	// declare all the things
-			int inp_count=0;			// this counts the number of strings entered separated by ' ' (space)
-			int input_length = strlen (input_string);			// make sure the input string actually has something in it
-			if (input_length <= 0) return 0;					// if input is empty return error
+			int inp_count=0;							// this counts the number of strings entered separated by ' ' (space)
+			int input_length = strlen (input_string);	// make sure the input string actually has something in it
+			if (input_length <= 0) return 0;			// if input is empty return error
 			for (int i=0; i<input_length; i++){
-					if (input_string[i]==' '){
+					if (input_string[i]==' '){			// if input array element 'i' is a 'space', make that array element \0
 						input_string[i] = '\0';
 					}
-					if (i==0){
+					if (i==0){												//if it is the first input element make pointer to first word in input string
 						*array_of_strings[input_length]=&input_string[i];
-						inp_count++;
+						inp_count++;										// increase the word count by 1
 					}
-					else if(input_string[i-1]=='\0'&&input_string[i]!=' '){
-						array_of_strings[inp_count]=&input_string[i];
+					else if(input_string[i-1]=='\0'&&input_string[i]!=' '){	// if previous element of the input string is a space (or now \0)
+						array_of_strings[inp_count]=&input_string[i];		// make pointer to new string inside the array
 						inp_count++;
-					}
+					}														// then increase word count by 1
 			}
 		return inp_count;
 }
