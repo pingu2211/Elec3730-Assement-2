@@ -20,17 +20,6 @@ int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);		// Function poin
 int8_t *Help_s; 													// Help information
 } command_s;
 
-
-<<<<<<< HEAD
-const command_s CommandList[] = {
-{"add", &add, 		"add <num 1> .. <num N>"},
-{"sub", &subtract, 	"sub <num 1> <num 2>"},
-{"mul", &multiply, 	"mul <num 1> .. <num N>"},
-{"div", &divide, 	"div <num 1> <num 2>"},
-{"debug", &debug,	"Togggles debug messages (Optional arg <on|off>)"},
-{"help",&help, "help <command>"},
-{NULL, NULL, NULL}
-=======
 const command_s CommandList[] = {												// structure holding list of commands and their help displays.
 {"add", 		&add, 		"add <num 1> .. <num N>"},							// addition function
 {"sub", 		&subtract, 	"subtract <num 1> <num 2>"},						// subtraction function
@@ -38,18 +27,13 @@ const command_s CommandList[] = {												// structure holding list of comman
 {"div", 		&divide, 	"divide <num 1> <num 2>"},							// division function
 {"debug", 		&debug,		"Togggles debug messages (Optional arg <on|off>)"},	// debug messages on and off
 {NULL, 			NULL, 		NULL}
->>>>>>> 2f9aac58035703163c69724d2a1d6d8e8332d467
 };
 
 
 int8_t help(char *args[], uint8_t count){ 		// help function to display command help messages
 	if (USR_DBG)printf("%s\n",args[0]);
-<<<<<<< HEAD
-		for (int i=0;CommandList[i].Command_string!=NULL;i++){
-=======
-		char **Args = &args[1];
 		for (int i=0;CommandList[i].Command_string!=NULL;i++){  	// compare the help command
->>>>>>> 2f9aac58035703163c69724d2a1d6d8e8332d467
+
 			if(strcmp(CommandList[i].Command_string,args[0])==0){
 				printf("\%s\n",CommandList[i].Help_s);
 			}
