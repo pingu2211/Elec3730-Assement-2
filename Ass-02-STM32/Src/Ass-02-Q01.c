@@ -11,7 +11,7 @@
 
 enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
 int8_t help(char *args[], uint8_t count);
-int string_parser2 (char *input_string, char **array_of_strings[]);
+int string_parser (char *input_string, char **array_of_strings[]);
 
 
 typedef struct{
@@ -46,10 +46,10 @@ int8_t help(char *args[], uint8_t count){ 		// help function to display command 
 }
 
 
-/*int string_parser2 (char *inp, char **array_of_words_p[]) {
-=======
+/*int string_parser2 (char *inp, char **array_of_words_p[]) {*/
+
 int string_parser (char *inp, char **array_of_words_p[]) {
->>>>>>> 3696a74a3131e8dd6c76137fb058e939147580bf
+
 	int word_count=0;
 	int j = 0;
 	int input_lenght = strlen (inp);
@@ -84,7 +84,7 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 		array_of_words[word_count] = (char*)realloc (array_of_words[word_count], j + 1);
 
 		if (!array_of_words[word_count]) {
-			printf ("Error in String Passer\nerror reallocsting memmory");
+			printf ("Error in String Passer\nerror reallocating memory");
 			return -1;
 		}
 		word_count++;
@@ -93,14 +93,14 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 
 	}
 	else {
-		printf ("Error in String Passer\nerror allocsting memmory");
+		printf ("Error in String Passer\nerror allocating memory");
 		return -1;
 	}
 	array_of_words = (char**)realloc (array_of_words, sizeof (*array_of_words) * word_count);
 	*array_of_words_p = array_of_words;
 	if (USR_DBG)printf ("WordCount = %d\n", word_count);
 	return word_count;
-}*/
+}
 
 int isControlChar(char c){				// checks input character against the ascii table
 	if (c<32||c==127) return true;		// returns true if input is a valid character
@@ -151,7 +151,7 @@ void CommandLineParserProcess(void)
 			printf("\n");
 			if (_count>0){
 				input_s[_count] = '\0';							// add \0 to the end of the string
-				wordcount = string_parser2 (input_s, &words); 	// call string parser function
+				wordcount = string_parser (input_s, &words); 	// call string parser function
 				Command_Function(wordcount, words);
 				if(USR_DBG)printf("%s\n",input_s);				// prints debug messages
 				_count = 0;
@@ -176,7 +176,8 @@ void CommandLineParserProcess(void)
 }
 
 
-int string_parser2(char *input_string, char **array_of_strings[])
+/*
+int string_parser(char *input_string, char **array_of_strings[])
 	{
 			int inp_count=0;							// this counts the number of strings entered separated by ' ' (space)
 			int input_length = strlen (input_string);	// make sure the input string actually has something in it
@@ -195,6 +196,6 @@ int string_parser2(char *input_string, char **array_of_strings[])
 					}														// then increase word count by 1
 			}
 		return inp_count;
-}
+}*/
 
 
