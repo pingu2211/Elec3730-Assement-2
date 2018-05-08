@@ -13,6 +13,7 @@ enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,D
 int8_t help(char *args[], uint8_t count);
 int string_parser (char *input_string, char **array_of_strings[]);
 
+
 typedef struct{
 int8_t *Command_string; 										// Command string
 int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);	// Function pointer				//
@@ -26,14 +27,13 @@ const command_s CommandList[] = {
 {"mul", &multiply, 	"mul <num 1> .. <num N>"},
 {"div", &divide, 	"div <num 1> <num 2>"},
 {"debug", &debug,	"Togggles debug messages (Optional arg <on|off>)"},
-{"threshold",&threshold, "Ajusts the movement threshold for the touch screen"},
+{"help",&help, "help <command>"},
 {NULL, NULL, NULL}
 };
 
 
 int8_t help(char *args[], uint8_t count){
 	if (USR_DBG)printf("%s\n",args[0]);
-		char **Args = &args[1];
 		for (int i=0;CommandList[i].Command_string!=NULL;i++){
 			if(strcmp(CommandList[i].Command_string,args[0])==0){
 				printf("\%s\n",CommandList[i].Help_s);
