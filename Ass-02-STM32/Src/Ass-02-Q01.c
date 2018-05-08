@@ -11,7 +11,7 @@
 
 enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
 int8_t help(char *args[], uint8_t count);
-int string_parser (char *input_string, char **array_of_strings[]);
+int string_parser2 (char *input_string, char **array_of_strings[]);
 
 typedef struct{
 int8_t *Command_string; 											// Command string
