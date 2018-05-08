@@ -13,12 +13,12 @@ enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,D
 int8_t help(char *args[], uint8_t count);
 int string_parser2 (char *input_string, char **array_of_strings[]);
 
+
 typedef struct{
 int8_t *Command_string; 											// Command string
 int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);		// Function pointer				//
 int8_t *Help_s; 													// Help information
 } command_s;
-
 
 const command_s CommandList[] = {												// structure holding list of commands and their help displays.
 {"add", 		&add, 		"add <num 1> .. <num N>"},							// addition function
@@ -32,8 +32,8 @@ const command_s CommandList[] = {												// structure holding list of comman
 
 int8_t help(char *args[], uint8_t count){ 		// help function to display command help messages
 	if (USR_DBG)printf("%s\n",args[0]);
-		char **Args = &args[1];
 		for (int i=0;CommandList[i].Command_string!=NULL;i++){  	// compare the help command
+
 			if(strcmp(CommandList[i].Command_string,args[0])==0){
 				printf("\%s\n",CommandList[i].Help_s);
 			}

@@ -7,12 +7,13 @@
 #define MOVEMENT_THRESHOLD 10
 #define ygrid (240-1)/5
 #define xgrid (320)/5
-#define BUTTONS_COUNT 17
 #define FILL_COLOUR	0xFFFF
 #define ALT_COLOUR	0x9CB2
 #define TEXT_COLOUR 0x127C
+#define COLOUR_BLACK 0xFFFF
+#define COLOUR_WHITE 0x0000
 #define MAX_LEN 18
-bool KEY_DOWN;
+bool _KEY_DOWN;
 
 typedef struct button{
 	char * ID;
@@ -44,13 +45,7 @@ bool is_pressed(struct button B,Coordinate *point){
 	else return false;
 }
 
-int dist(Coordinate N1, Coordinate N2){
-	int diff = (int)(N2.x-N1.x)^2+(N2.y-N1.y)^2;
-	//if(USR_DBG)printf("DIST = %i\n",diff);
-	return diff;
-}
-
-struct button buttons[BUTTONS_COUNT]={
+struct button buttons[]={
 		{"0",0*xgrid,4*ygrid,3*xgrid,ygrid,"0",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"1",0*xgrid,1*ygrid,xgrid,ygrid,"1",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"2",1*xgrid,1*ygrid,xgrid,ygrid,"2",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
@@ -67,23 +62,62 @@ struct button buttons[BUTTONS_COUNT]={
 		{"=",3*xgrid,4*ygrid,xgrid,ygrid,"=",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"*",4*xgrid,1*ygrid,xgrid,ygrid,"*",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"/",4*xgrid,2*ygrid,xgrid,ygrid,"/",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"C",4*xgrid,3*ygrid,xgrid,ygrid,"C",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR}
+		{"C",4*xgrid,3*ygrid,xgrid,ygrid,"C",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{NULL,NULL,NULL,NULL,NULL,NULL,NULL}
 };
 
-int itt = 0;
+int _ITT = 0;
 char ** opperands;
+char _OPPERATOR=NULL;
 void button_pressed(struct button key){
+	BSP_LCD_SetTextColor(COLOUR_WHITE);
+	BSP_LCD_FillRect(0,0,BSP_LCD_GetXSize(),ygrid);
+	double result=0;
 	switch (key.ID[0]){
 	case 'C':
-		opperands[itt]=strcpy(opperands[itt],"\0");
+		if (strlen(opperands[_ITT])>0)opperands[_ITT]=strcpy(opperands[_ITT],"\0");
+		else {
+			_ITT=0;
+			strcpy(opperands[0],"\0");
+			strcpy(opperands[1],"\0");
+			_OPPERATOR=NULL;
+		}
 		break;
 	case '+':
 	case '-':
 	case '/':
 	case '*':
-		BSP_LCD_SetBackColor(0x0000);
-		BSP_LCD_SetTextColor(0xffff);
-		BSP_LCD_DisplayStringAt(BSP_LCD_GetXSize(),LINE(0),key.ID,RIGHT_MODE);
+	case '=':
+		if (_OPPERATOR==NULL||(strlen(opperands[1])<1)){
+			_OPPERATOR=key.ID[0];
+			if(_ITT<1){
+				_ITT=(_ITT+1)%2;
+			}
+		}else{
+			double n1 = atof(opperands[0]);
+			double n2 = atof(opperands[1]);
+			switch(_OPPERATOR){
+			case '+':
+				result = n1+n2;
+				break;
+			case '*':
+				result = n1*n2;
+				break;
+			case '/':
+				result = n1/n2;
+				break;
+			case '-':
+				result = n1-n2;
+				break;
+			case '=':
+				break;
+			}
+			_OPPERATOR=key.ID[0];
+			strcpy(opperands[1],"\0");
+			opperands[0]=realloc(opperands[0],MAX_LEN);
+			snprintf(opperands[0],MAX_LEN,"%lf",result);
+			_ITT=1;
+		}
 		break;
 	case '0':
 	case '1':
@@ -95,37 +129,35 @@ void button_pressed(struct button key){
 	case '7':
 	case '8':
 	case '9':
-		if (strlen(opperands[itt])<MAX_LEN){
-			opperands[itt] = realloc(opperands[itt],(strlen(opperands[itt])+1)+(strlen(key.ID)+1));
-			strcat(opperands[itt],key.ID);
-			printf("\n:%s\n",opperands[itt]);
+		if (strlen(opperands[_ITT])<MAX_LEN){
+			opperands[_ITT] = realloc(opperands[_ITT],(strlen(opperands[_ITT])+1)+(strlen(key.ID)+1));
+			strcat(opperands[_ITT],key.ID);
+			printf("\n%i:%s\n",_ITT,opperands[_ITT]);
 		}
 		break;
 	case '.':
-		if (strchr(opperands[itt],'.')==NULL){
-			strcat(opperands[itt],key.ID);
+		if (strchr(opperands[_ITT],'.')==NULL){
+			strcat(opperands[_ITT],key.ID);
 		}
 		break;
 	}
 
-	BSP_LCD_SetTextColor(0x0000);
-	BSP_LCD_FillRect(0,0,BSP_LCD_GetXSize(),ygrid);
-	BSP_LCD_SetBackColor(0x0000);
-	BSP_LCD_SetTextColor(0xffff);
-	BSP_LCD_DisplayStringAt(BSP_LCD_GetXSize(),LINE(1), opperands[itt] , RIGHT_MODE);
+	int width=(((sFONT *)BSP_LCD_GetFont())->Width);
+	BSP_LCD_SetBackColor(COLOUR_WHITE);
+	BSP_LCD_SetTextColor(COLOUR_BLACK);
+	if (_OPPERATOR!=NULL)BSP_LCD_DisplayChar(BSP_LCD_GetXSize()-width,LINE(0), _OPPERATOR);
+	BSP_LCD_DisplayStringAt(BSP_LCD_GetXSize()-width,LINE(0), opperands[(_ITT+1)%2] , RIGHT_MODE);
+	BSP_LCD_DisplayStringAt(BSP_LCD_GetXSize(),LINE(1), opperands[_ITT] , RIGHT_MODE);
 }
 
 
 void CalculatorInit(void)
 {
-	sFONT font;
-  // STEPIEN: Assume horizontal display
-  // Initialize and turn on LCD and calibrate the touch panel
   BSP_LCD_Init();
   BSP_LCD_DisplayOn();
   BSP_TP_Init();
-  if (USR_DBG);printf("Screen is %i X %i\n", BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
-  for (int i=0;i<BUTTONS_COUNT;i++){
+  if (USR_DBG)printf("Screen is %i X %i\n", BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+  for (int i=0;buttons[i].ID!=NULL;i++){
 	  button_show(buttons[i]);
   }
   opperands = malloc (2*sizeof(char*));
@@ -148,29 +180,29 @@ void CalculatorInit(void)
 }
 
 
-int debounce = 0;
+int _DEBOUNCE = 0;
 void CalculatorProcess(void)
 {
   int state = BSP_TP_GetDisplayPoint(&display);
   if (state == 0){
-	  debounce = 0;
+	  _DEBOUNCE = 0;
 	  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_SET); // Toggle LED4
-	  if (!KEY_DOWN){
+	  if (!_KEY_DOWN){
 		  if (USR_DBG) printf("TOUCH GOT (%i,%i)\n",display.x,display.y);
-			for (int i=0;i<BUTTONS_COUNT;i++){
+			for (int i=0;buttons[i].ID!=NULL;i++){
 				  if (is_pressed(buttons[i],&display)){
 					  if (USR_DBG) printf("%s PRESSED (%i,%i)",buttons[i].ID,display.x,display.y);
 					  button_press(buttons[i]);
 					  button_pressed(buttons[i]);
-					  KEY_DOWN=true;
+					  _KEY_DOWN=true;
 				  }else{
 					  button_show(buttons[i]);
 			}
 	  	  }
 	  }
   }else{
-	  if (debounce++ > 30){
-		  KEY_DOWN=false;
+	  if (_DEBOUNCE++ > 30){
+		  _KEY_DOWN=false;
 		  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_RESET);
 	  }
 

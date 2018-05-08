@@ -95,8 +95,7 @@ int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 o
 int8_t debug(char *args[], uint8_t count){		// function that is used to turn debug mesages on and off
 	if (count==0)USR_DBG=!USR_DBG;
 	if (count==1){
-		if (args[1]=="on"||args[1]=="ON"){
-
+		if (strcmp(args[1],"on")==0||strcmp(args[1],"ON")==0){
 			USR_DBG=true;
 		}else{
 			USR_DBG=false;
@@ -107,14 +106,6 @@ int8_t debug(char *args[], uint8_t count){		// function that is used to turn deb
 	return 0;
 }
 
-
-int8_t threshold(char *args[], uint8_t count){
-	if(count == 0)printf("current threshold %i", _MOVEMENT_THRESHOLD);
-	else if(count == 1){
-		_MOVEMENT_THRESHOLD = atoi(args[0]);
-	}
-
-}
 
 
 
