@@ -61,22 +61,23 @@ int8_t add(char *numbers_p[], uint8_t count) {				// function adds 2 or more num
 	double sum = 0;
 	for (int i = 0; i < count; i++)
 	{
-		sum += numbers[i];				// add each number to the sum of the previous numbers
-	}									// where sum starts = 0
-	printf("=%lf\n",sum);
+		sum += numbers[i];				// add each number to the sum of the previous numbers where sum starts = 0
+	}
+	printf("=%lf\n",sum);				// print the result of all numbers summed together
 	return 0;
 }
 
 
 
-int8_t multiply(char *numbers_p[], uint8_t count) {
-	double * numbers =  malloc(count*sizeof(double));
+int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 or more numbers together
+
+	double * numbers =  malloc(count*sizeof(double));		// allocate memory for input numbers
 	for (int i = 0; i < count; i++){
-		if (!isNumber(numbers_p[i])){
-			printf("Arguments must be real numbers");
+		if (!isNumber(numbers_p[i])){						// if input is not a number
+			printf("Arguments must be real numbers");		// return a message to user that the input was not a number
 			return -1;
 		}else{
-			numbers[i]=atof(numbers_p[i]);
+			numbers[i]=atof(numbers_p[i]);					// take the input number that is a string of characters and convert to a double
 		}
 	}
 
@@ -84,14 +85,14 @@ int8_t multiply(char *numbers_p[], uint8_t count) {
 	for (int i = 0; i < count; i++)
 	{
 
-		sum *= numbers[i];
+		sum *= numbers[i];				// multiply each number together with first number multiplied by 1
 	}
-	printf("=%lf\n",sum);
+	printf("=%lf\n",sum);				// print result
 	return 0;
 }
 
 
-int8_t debug(char *args[], uint8_t count){
+int8_t debug(char *args[], uint8_t count){		// function that is used to turn debug mesages on and off
 	if (count==0)USR_DBG=!USR_DBG;
 	if (count==1){
 		if (args[1]=="on"||args[1]=="ON"){
