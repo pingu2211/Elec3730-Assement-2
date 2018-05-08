@@ -13,7 +13,6 @@ enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,D
 int8_t help(char *args[], uint8_t count);
 int string_parser (char *input_string, char **array_of_strings[]);
 
-
 typedef struct{
 int8_t *Command_string; 											// Command string
 int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);		// Function pointer				//

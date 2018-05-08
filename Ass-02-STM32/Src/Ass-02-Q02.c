@@ -46,7 +46,7 @@ bool is_pressed(struct button B,Coordinate *point){
 }
 
 struct button buttons[]={
-		{"0",0*xgrid,4*ygrid,3*xgrid,ygrid,"0",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"0",0*xgrid,4*ygrid,2*xgrid,ygrid,"0",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"1",0*xgrid,1*ygrid,xgrid,ygrid,"1",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"2",1*xgrid,1*ygrid,xgrid,ygrid,"2",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"3",2*xgrid,1*ygrid,xgrid,ygrid,"3",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
@@ -62,7 +62,9 @@ struct button buttons[]={
 		{"=",3*xgrid,4*ygrid,xgrid,ygrid,"=",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"*",4*xgrid,1*ygrid,xgrid,ygrid,"*",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"/",4*xgrid,2*ygrid,xgrid,ygrid,"/",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"C",4*xgrid,3*ygrid,xgrid,ygrid,"C",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"^",4*xgrid,3*ygrid,xgrid,ygrid,"POW",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"C",4*xgrid,4*ygrid,xgrid,ygrid,"C",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"`",2*xgrid,4*ygrid,xgrid,ygrid,"+/-",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{NULL,NULL,NULL,NULL,NULL,NULL,NULL}
 };
 
@@ -70,10 +72,23 @@ int _ITT = 0;
 char ** opperands;
 char _OPPERATOR=NULL;
 void button_pressed(struct button key){
+	char * scratch;
 	BSP_LCD_SetTextColor(COLOUR_WHITE);
 	BSP_LCD_FillRect(0,0,BSP_LCD_GetXSize(),ygrid);
 	double result=0;
 	switch (key.ID[0]){
+	case '`':
+		if (opperands[_ITT][0]=='-'){
+			opperands[_ITT][0]='+';
+		}else if (opperands[_ITT][0]=='+'){
+			opperands[_ITT][0]='-';
+		}else{
+			scratch = malloc(MAX_LEN);
+			strcpy(scratch,"-");
+			opperands[_ITT]=strcat(scratch,opperands[_ITT]);
+			scratch=NULL;
+		}
+		break;
 	case 'C':
 		if (strlen(opperands[_ITT])>0)opperands[_ITT]=strcpy(opperands[_ITT],"\0");
 		else {
@@ -87,6 +102,7 @@ void button_pressed(struct button key){
 	case '-':
 	case '/':
 	case '*':
+	case '^':
 	case '=':
 		if (_OPPERATOR==NULL||(strlen(opperands[1])<1)){
 			_OPPERATOR=key.ID[0];
@@ -108,6 +124,9 @@ void button_pressed(struct button key){
 				break;
 			case '-':
 				result = n1-n2;
+				break;
+			case '^':
+				result = pow(n1,n2);
 				break;
 			case '=':
 				break;
@@ -142,6 +161,12 @@ void button_pressed(struct button key){
 		break;
 	}
 
+	if(strlen(opperands[_ITT])>1&&opperands[_ITT][0]=='0'){
+			char* new=strpbrk(opperands[_ITT], "-123456789.");
+			if (new!=NULL){
+				opperands[_ITT]=new;
+			}
+	}
 	int width=(((sFONT *)BSP_LCD_GetFont())->Width);
 	BSP_LCD_SetBackColor(COLOUR_WHITE);
 	BSP_LCD_SetTextColor(COLOUR_BLACK);
