@@ -83,17 +83,9 @@ int main(void)
   MX_USART2_UART_Init();
   MX_FSMC_Init();
 
-  /* USER CODE BEGIN 2 */
-
-  // STEPIEN: Set the buffer sizes to 1
-  //
-
   setvbuf(stdin, NULL, _IONBF, 0);
   setvbuf(stdout, NULL, _IONBF, 0);
   setvbuf(stderr, NULL, _IONBF, 0);
-
-  // STEPIEN: Call the main assignment code (never returns)
-  //
   Ass_02_Main();
 
   /* USER CODE END 2 */

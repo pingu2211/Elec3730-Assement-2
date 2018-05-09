@@ -9,7 +9,7 @@ bool isNumber(char * str){												// checks input against ascii table
 			return false;
 		}
 	}
-	if (USR_DBG)printf("%s is %.5lf",str,atof(str));
+	if (USR_DBG)printf("\n|%s|string is |%lf|double\n",str,atof(str));
 	return true;
 }
 
