@@ -84,7 +84,6 @@ int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 o
 	double sum = 1;
 	for (int i = 0; i < count; i++)
 	{
-
 		sum *= numbers[i];				// multiply each number together with first number multiplied by 1
 	}
 	printf("=%lf\n",sum);				// print result
@@ -92,7 +91,7 @@ int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 o
 }
 
 
-int8_t debug(char *args[], uint8_t count){		// function that is used to turn debug mesages on and off
+int8_t debug(char *args[], uint8_t count){		// function that is used to turn debug messages on and off
 	if (count==0)USR_DBG=!USR_DBG;
 	if (count==1){
 		if (strcmp(args[1],"on")==0||strcmp(args[1],"ON")==0){

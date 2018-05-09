@@ -75,6 +75,7 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 				j = 0;
 			}
 			else {
+				j=0;
 				continue;
 			}
 		}
@@ -157,7 +158,7 @@ void CommandLineParserProcess(void)
 			}
 			break;
 		case DEL:			// case 2: if user presses "backspace"
-			printf("\b");
+			printf("\b \b");
 			_count--;		// subtract 1 from count
 			break;
 
@@ -175,8 +176,8 @@ void CommandLineParserProcess(void)
 }
 
 
-/*
-int string_parser(char *input_string, char **array_of_strings[])
+
+/*int string_parser(char *input_string, char **array_of_strings[])
 	{
 			int inp_count=0;							// this counts the number of strings entered separated by ' ' (space)
 			int input_length = strlen (input_string);	// make sure the input string actually has something in it
