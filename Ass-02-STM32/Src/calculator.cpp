@@ -92,15 +92,15 @@ int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 o
 
 
 int8_t debug(char *args[], uint8_t count){		// function that is used to turn debug messages on and off
-	if (count==0)USR_DBG=!USR_DBG;
+	if (count==0)USR_DBG=!USR_DBG;				// if user enters only debug (1 word), switch debug status. ie if ON then switch to OFF
 	if (count==1){
-		if (strcmp(args[1],"on")==0||strcmp(args[1],"ON")==0){
-			USR_DBG=true;
+		if (strcmp(args[1],"on")==0||strcmp(args[1],"ON")==0){	// checks if user entered the command 'debug on (or ON)'
+			USR_DBG=true;										// if so, turn debug messages on
 		}else{
-			USR_DBG=false;
-		}
+			USR_DBG=false;										// if user types anything else, ie 'debug off'
+		}														// switch debug messages off
 	}
-	if (USR_DBG)printf("\nDEBUG ON\n");
+	if (USR_DBG)printf("\nDEBUG ON\n");		// print ON or OFF when debug message settings are switched
 	else printf("\nDEBUG OFF\n");
 	return 0;
 }
