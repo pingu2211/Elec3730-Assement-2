@@ -74,17 +74,13 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 				word_count++;												// increase the word counter by 1
 				array_of_words[word_count] = (char*)malloc (input_lenght);	// allocate memory for string
 				j = 0;
-<<<<<<< HEAD
 			}
 			else {
-=======
->>>>>>> e8a66af1c41a9a7e3d3734be090c0594711c08d1
 			}else{
 				j=0;
 				continue;
 			}
 
-<<<<<<< HEAD
 		array_of_words[word_count][j] = '\0';												// end string with NULL
 		array_of_words[word_count] = (char*)realloc (array_of_words[word_count], j + 1); 	// allocate memory for the NULL
 
@@ -96,11 +92,8 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 		array_of_words[word_count] = (char*)malloc (input_lenght);		// allocate memory for size of input string
 		j = 0;
 
-=======
 		}
-<<<<<<< HEAD
->>>>>>> e8a66af1c41a9a7e3d3734be090c0594711c08d1
-=======
+
 		if(j>0){
 			array_of_words[word_count][j] = '\0';
 							array_of_words[word_count] = (char*)realloc(array_of_words[word_count],j+1);
@@ -112,8 +105,6 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 							array_of_words[word_count] = (char*)malloc (input_lenght);
 							j = 0;
 		}
-
->>>>>>> 6bf58ce39e3f379adb2f3dee56ad4dc5b6d29fe1
 	}
 	else {
 		printf ("Error in String Passer\nerror allocating memory");		// print error message if memory allocation failed
