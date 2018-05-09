@@ -25,6 +25,7 @@ const command_s CommandList[] = {												// structure holding list of comman
 {"mul", 		&multiply, 	"multiply <num 1> .. <num N>"},						// multiplication function
 {"div", 		&divide, 	"divide <num 1> <num 2>"},							// division function
 {"debug", 		&debug,		"Togggles debug messages (Optional arg <on|off>)"},	// debug messages on and off
+{"clear",       &clear,      "clears the terminal"},
 {NULL, 			NULL, 		NULL}
 };
 
@@ -79,6 +80,18 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 			}
 
 		}
+		if(j>0){
+			array_of_words[word_count][j] = '\0';
+							array_of_words[word_count] = (char*)realloc(array_of_words[word_count],j+1);
+							if (!array_of_words[word_count]) {
+								printf ("Error in String Passer\nerror reallocsting memmory");
+								return -1;
+							}
+							word_count++;
+							array_of_words[word_count] = (char*)malloc (input_lenght);
+							j = 0;
+		}
+
 	}
 	else {
 		printf ("Error in String Passer\nerror allocating memory");
