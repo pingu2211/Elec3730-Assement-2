@@ -107,8 +107,11 @@ int8_t debug(char *args[], uint8_t count){		// function that is used to turn deb
 
 
 
-
-
+int8_t clear(char *args[], uint8_t count){
+	printf("\nclear\n");
+	printf("\e[1;1H\e[2J");
+	return 0;
+}
 
 
 
