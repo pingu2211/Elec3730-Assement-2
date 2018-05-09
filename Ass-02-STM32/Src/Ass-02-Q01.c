@@ -7,112 +7,9 @@
 #include "usart.h"
 #endif
 #include <stdbool.h>
-#include "calculator.h"
+
 
 enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
-int8_t help(char *args[], uint8_t count);
-int string_parser (char *input_string, char **array_of_strings[]);
-
-typedef struct{
-int8_t *Command_string; 											// Command string
-int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);		// Function pointer				//
-int8_t *Help_s; 													// Help information
-} command_s;
-
-const command_s CommandList[] = {												// structure holding list of commands and their help displays.
-{"add", 		&add, 		"add <num 1> .. <num N>"},							// addition function
-{"sub", 		&subtract, 	"subtract <num 1> <num 2>"},						// subtraction function
-{"mul", 		&multiply, 	"multiply <num 1> .. <num N>"},						// multiplication function
-{"div", 		&divide, 	"divide <num 1> <num 2>"},							// division function
-{"debug", 		&debug,		"Togggles debug messages (Optional arg <on|off>)"},	// debug messages on and off
-{"clear",       &clear,      "clears the terminal"},
-{NULL, 			NULL, 		NULL}
-};
-
-
-int8_t help(char *args[], uint8_t count){ 		// help function to display command help messages
-	if (USR_DBG)printf("%s\n",args[0]);
-		for (int i=0;CommandList[i].Command_string!=NULL;i++){  	// compare the help command
-
-			if(strcmp(CommandList[i].Command_string,args[0])==0){
-				printf("\%s\n",CommandList[i].Help_s);
-			}
-			if (count==0){												// when user types 'help' and no command
-				for (int h=0;CommandList[h].Command_string!=NULL;h++)
-				printf("\%s\n",CommandList[h].Help_s);					// print ALL command help messages
-			}
-		}
-		return 0;
-}
-
-
-/*int string_parser2 (char *inp, char **array_of_words_p[]) {*/
-
-int string_parser (char *inp, char **array_of_words_p[]) {
-
-	int word_count=0;								// counts amount of input strings
-	int j = 0;										// counts number of characters in each string
-	int input_lenght = strlen (inp);
-	if (input_lenght == 0) { return 0; }			// end if the input was empty
-	char** array_of_words;							// pointer to array of input strings
-	array_of_words = (char**)malloc(sizeof( *array_of_words) * input_lenght);	// allocate memory for array of strings
-	array_of_words[word_count] = (char*)malloc(input_lenght);					// allocate memory for each individual string in the input string
-
-	if (*array_of_words){
-		for (int i = 0; inp[i] != NULL; i++) {				// for loop that goes through each character of the input and checks it
-			if (inp[i]!=' ') {								// if the input character is not a space
-				array_of_words[word_count][j] = inp[i];		// element j of the current string = the input character
-				j++;										// increase word letter counter by 1
-			}
-			else if (j>0) {									// if input character is a space
-				array_of_words[word_count][j] = '\0';		// end the string with a NULL
-				array_of_words[word_count] = (char*)realloc(array_of_words[word_count],j+1); // allocate memory for the NULL
-				if (!array_of_words[word_count]) {
-					printf ("Error in String Passer\nerror reallocating memory"); 	// print error if error occurred allocating memory
-					return -1;
-				}
-				word_count++;												// increase the word counter by 1
-				array_of_words[word_count] = (char*)malloc (input_lenght);	// allocate memory for string
-				j = 0;
-
-			}else{
-				j=0;
-				continue;
-			}
-
-		array_of_words[word_count][j] = '\0';												// end string with NULL
-		array_of_words[word_count] = (char*)realloc (array_of_words[word_count], j + 1); 	// allocate memory for the NULL
-
-		if (!array_of_words[word_count]) {
-			printf ("Error in String Passer\nerror reallocating memory");	// print error if memory allocation failed
-			return -1;
-		}
-		word_count++;													// increase word count by 1
-		array_of_words[word_count] = (char*)malloc (input_lenght);		// allocate memory for size of input string
-		j = 0;
-		}
-
-		if(j>0){
-			array_of_words[word_count][j] = '\0';
-							array_of_words[word_count] = (char*)realloc(array_of_words[word_count],j+1);
-							if (!array_of_words[word_count]) {
-								printf ("Error in String Passer\nerror reallocsting memmory");
-								return -1;
-							}
-							word_count++;
-							array_of_words[word_count] = (char*)malloc (input_lenght);
-							j = 0;
-		}
-	}
-	else {
-		printf ("Error in String Passer\nerror allocating memory");		// print error message if memory allocation failed
-		return -1;
-	}
-	array_of_words = (char**)realloc (array_of_words, sizeof (*array_of_words) * word_count); // allocate memory for size of array of strings
-	*array_of_words_p = array_of_words;							// pointer to array of words
-	if (USR_DBG)printf ("WordCount = %d\n", word_count);		// debug messages
-	return word_count;
-}
 
 int isControlChar(char c){				// checks input character against the ascii table
 	if (c<32||c==127) return true;		// returns true if input is a valid character
@@ -131,17 +28,6 @@ void CommandLineParserInit(void)
   printf("Command Line Parser Example\n");
 }
 
-int Command_Function(int num_count, char **Array_numbers){				// function takes input from user and compares the command with list of commands
-	if (USR_DBG)printf("%s\n",Array_numbers[0]);						// each command references a particular function (add, multiply, etc.)
-	char **Args = &Array_numbers[1];
-	for (int i=0;CommandList[i].Command_string!=NULL;i++){
-		if(strcmp(CommandList[i].Command_string,Array_numbers[0])==0){	// compare input string to command list
-			if (USR_DBG)printf("first arg = %s\n",Args[0]);				// implemented debug messages
-			CommandList[i].Function_p(Args,num_count-1);				// reference to function the user has entered.
-		}
-	}
-	return 0;
-}
 
 void CommandLineParserProcess(void)
 {
@@ -186,28 +72,4 @@ void CommandLineParserProcess(void)
   printf("SERIAL: Got '%c'\n", c);
 #endif
 }
-
-
-
-/*int string_parser(char *input_string, char **array_of_strings[])
-	{
-			int inp_count=0;							// this counts the number of strings entered separated by ' ' (space)
-			int input_length = strlen (input_string);	// make sure the input string actually has something in it
-			if (input_length <= 0) return 0;			// if input is empty return error
-			for (int i=0; i<input_length; i++){
-					if (input_string[i]==' '){			// if input array element 'i' is a 'space', make that array element \0
-						input_string[i] = '\0';
-					}
-					if (i==0){												//if it is the first input element make pointer to first word in input string
-						*array_of_strings[input_length]=&input_string[i];
-						inp_count++;										// increase the word count by 1
-					}
-					else if(input_string[i-1]=='\0'&&input_string[i]!=' '){	// if previous element of the input string is a space (or now \0)
-						array_of_strings[inp_count]=&input_string[i];		// make pointer to new string inside the array
-						inp_count++;
-					}														// then increase word count by 1
-			}
-		return inp_count;
-}*/
-
 

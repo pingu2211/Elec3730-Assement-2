@@ -26,15 +26,20 @@
 // Assignment main
 extern void Ass_02_Main(void);
 
-//
-// REPLACE THE EXAMPLE CODE WITH YOUR CODE 
-//
+extern int8_t add (char *numbers_p[], uint8_t count);
+extern int8_t subtract (char *numbers_p[], uint8_t count);
+extern int8_t multiply (char *numbers_p[], uint8_t count);
+extern int8_t divide (char *numbers_p[], uint8_t count);
+extern int8_t debug(char *args[], uint8_t count);
+extern int8_t clear(char *args[], uint8_t count);
+extern int8_t help(char *args[], uint8_t count);
+extern int Command_Function(int num_count, char **Array_numbers);
+extern int string_parser (char *inp, char **array_of_words_p[]);
 
 // Question 1
 extern void CommandLineParserInit(void);
 extern void CommandLineParserProcess(void);
 bool USR_DBG;
-int _MOVEMENT_THRESHOLD;
 
 // Question 2
 extern void CalculatorInit(void);

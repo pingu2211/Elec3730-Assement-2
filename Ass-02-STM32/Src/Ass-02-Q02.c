@@ -4,7 +4,6 @@
 
 #include "Ass-02.h"
 
-#define MOVEMENT_THRESHOLD 10
 #define ygrid (240-1)/5
 #define xgrid (320)/5
 #define FILL_COLOUR	0xFFFF

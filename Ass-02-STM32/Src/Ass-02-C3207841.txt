@@ -1,0 +1,656 @@
+//     $Date: 2018-03-26 08:32:18 +1100 (Mon, 26 Mar 2018) $
+// $Revision: 1217 $
+//   $Author: Peter $
+
+#include "Ass-02.h"
+
+// STEPIEN: Added two touch panel functions to make the interface more
+//          consistent with the LCD BSP.
+bool USR_DBG = false;
+
+
+#ifdef STM32F407xx
+uint8_t BSP_TP_Init(void)
+{
+  // Initialise the interface and calibrate
+  TP_Init(); // This is an empty function since done by STM32CubeMX
+  TouchPanel_Calibrate();
+  return 0;
+}
+/************************************************************************************************/
+uint8_t BSP_TP_GetDisplayPoint(Coordinate *pDisplay)
+{
+  Coordinate *pScreen;
+
+  pScreen = Read_Ads7846();
+  if (pScreen == NULL)
+  {
+    return 1; // Error reading the touch panel
+  }
+  if (getDisplayPoint(pDisplay, pScreen, &matrix ) == DISABLE)
+  {
+	printf("Error in LCD\n");
+    return -1; // Error in LCD
+  }
+  return 0;
+}
+/************************************************************************************************/
+#endif
+
+//Calculator functions
+/************************************************************************************************/
+bool isNumber(char * str){												// checks input against ascii table
+	for (int i=0;i<strlen(str);i++){									// makes sure input is a number
+		if ( (str[i] < 48 || str[i] >57)&&!(str[i]==45||str[i]==46) ){
+			if (USR_DBG)printf("is not a number\n");					// print debug messages
+			return false;
+		}
+	}
+	if (USR_DBG)printf("\n|%s|string is |%lf|double\n",str,atof(str));
+	return true;
+}
+/************************************************************************************************/
+int8_t divide (char *numbers_p[], uint8_t count) {			// function divides 2 numbers returns answer
+	double * numbers =  malloc(count*sizeof(double));		// allocate memory for input numbers
+	if (count!=2) return -1;								// make sure user entered 2 numbers (no more no less)
+		for (int i = 0; i < count; i++){
+			if (!isNumber(numbers_p[i])){					// if input is not a number
+				printf("Arguments must be real numbers");	// return a message to user that the input was not a number
+				return -1;
+			}else{
+				numbers[i]=atof(numbers_p[i]);				// take the input number that is a string of characters and convert to a double
+			}
+		}
+		printf("=%lf",numbers[0]/numbers[1]);				// divide the 1st input number by the 2nd and print result
+		return (0);
+}
+/************************************************************************************************/
+int8_t subtract (char *numbers_p[], uint8_t count) {		// function subtracts 1 number from another
+
+	double * numbers =  malloc(count*sizeof(double));		// allocate memory for input numbers
+	if (count!=2) return -1;								// make sure user entered 2 numbers (no more no less)
+	for (int i = 0; i < count; i++){
+		if (!isNumber(numbers_p[i])){						// if input is not a number
+			printf("Arguments must be real numbers");		// return a message to user that the input was not a number
+			return -1;
+		}else{
+			numbers[i]=atof(numbers_p[i]);					// take the input number that is a string of characters and convert to a double
+		}
+	}
+	printf("=%lf",numbers[0]-numbers[1]);					// subtract 2nd number from 1st and print result
+	return (0);
+}
+/************************************************************************************************/
+int8_t add(char *numbers_p[], uint8_t count) {				// function adds 2 or more numbers
+
+	double * numbers =  malloc(count*sizeof(double));		// allocate memory for input numbers
+	for (int i = 0; i < count; i++){
+		if (!isNumber(numbers_p[i])){						// if input is not a number
+			printf("Arguments must be real numbers");		// return a message to user that the input was not a number
+			return -1;
+		}else{
+			numbers[i]=atof(numbers_p[i]);					// take the input number that is a string of characters and convert to a double
+		}
+	}
+	double sum = 0;
+	for (int i = 0; i < count; i++)
+	{
+		sum += numbers[i];				// add each number to the sum of the previous numbers where sum starts = 0
+	}
+	printf("=%lf\n",sum);				// print the result of all numbers summed together
+	return 0;
+}
+/************************************************************************************************/
+int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 or more numbers together
+	printf("\ncount:%i\n",count);
+	double * numbers =  malloc(count*sizeof(double));		// allocate memory for input numbers
+	for (int i = 0; i < count; i++){
+		if (!isNumber(numbers_p[i])){						// if input is not a number
+			printf("Arguments must be real numbers");		// return a message to user that the input was not a number
+			return -1;
+		}else if (strlen(numbers_p[i])>0){
+			numbers[i]=atof(numbers_p[i]);					// take the input number that is a string of characters and convert to a double
+		}
+	}
+
+	double sum = 1;
+	for (int i = 0; i < count; i++)
+	{
+		sum *= numbers[i];				// multiply each number together with first number multiplied by 1
+	}
+	printf("=%lf\n",sum);				// print result
+	return 0;
+}
+/************************************************************************************************/
+int8_t debug(char *args[], uint8_t count){		// function that is used to turn debug messages on and off
+	if (count==0)USR_DBG=!USR_DBG;				// if user enters only debug (1 word), switch debug status. ie if ON then switch to OFF
+	if (count==1){
+		if (strcmp(args[1],"on")==0||strcmp(args[1],"ON")==0){	// checks if user entered the command 'debug on (or ON)'
+			USR_DBG=true;										// if so, turn debug messages on
+		}else{
+			USR_DBG=false;										// if user types anything else, ie 'debug off'
+		}														// switch debug messages off
+	}
+	if (USR_DBG)printf("\nDEBUG ON\n");		// print ON or OFF when debug message settings are switched
+	else printf("\nDEBUG OFF\n");
+	return 0;
+}
+/************************************************************************************************/
+int8_t clear(char *args[], uint8_t count){	// function clears the terminal window
+
+	printf("\nclear\n");
+	printf("\e[1;1H\e[2J");
+	return 0;
+}
+/************************************************************************************************/
+
+typedef struct{
+int8_t *Command_string; 											// Command string
+int8_t (*Function_p)(uint8_t *numbers_p[], uint8_t num_count);		// Function pointer				//
+int8_t *Help_s; 													// Help information
+} command_s;
+
+const command_s CommandList[] = {												// structure holding list of commands and their help displays.
+{"add", 		&add, 		"add <num 1> .. <num N>"},							// addition function
+{"sub", 		&subtract, 	"subtract <num 1> <num 2>"},						// subtraction function
+{"mul", 		&multiply, 	"multiply <num 1> .. <num N>"},						// multiplication function
+{"div", 		&divide, 	"divide <num 1> <num 2>"},							// division function
+{"debug", 		&debug,		"Togggles debug messages (Optional arg <on|off>)"},	// debug messages on and off
+{"clear",       &clear,      "clears the terminal"},
+{NULL, 			NULL, 		NULL}
+};
+
+
+int8_t help(char *args[], uint8_t count){   // help function to display command help messages
+	if (USR_DBG)printf("%s\n",args[0]);
+	for (int i=0;CommandList[i].Command_string!=NULL;i++){  	// compare the help command
+
+		if(strcmp(CommandList[i].Command_string,args[0])==0){
+			printf("\%s\n",CommandList[i].Help_s);
+		}
+		if (count==0){												// when user types 'help' and no command
+			for (int h=0;CommandList[h].Command_string!=NULL;h++)
+			printf("\%s\n",CommandList[h].Help_s);					// print ALL command help messages
+		}
+	}
+	return 0;
+}
+/************************************************************************************************/
+int Command_Function(int num_count, char **Array_numbers){				// function takes input from user and compares the command with list of commands
+	if (USR_DBG)printf("%s\n",Array_numbers[0]);						// each command references a particular function (add, multiply, etc.)
+	char **Args = &Array_numbers[1];
+	for (int i=0;CommandList[i].Command_string!=NULL;i++){
+		if(strcmp(CommandList[i].Command_string,Array_numbers[0])==0){	// compare input string to command list
+			if (USR_DBG)printf("first arg = %s\n",Args[0]);				// implemented debug messages
+			CommandList[i].Function_p(Args,num_count-1);				// reference to function the user has entered.
+		}
+	}
+	return 0;
+}
+/************************************************************************************************/
+int string_parser (char *inp, char **array_of_words_p[]) {
+	int word_count=0;								// counts amount of input strings
+	int j = 0;										// counts number of characters in each string
+	int input_lenght = strlen (inp);
+	if (input_lenght == 0) { return 0; }			// end if the input was empty
+	char** array_of_words;							// pointer to array of input strings
+	array_of_words = (char**)malloc(sizeof( *array_of_words) * input_lenght);	// allocate memory for array of strings
+	array_of_words[word_count] = (char*)malloc(input_lenght);					// allocate memory for each individual string in the input string
+
+	if (*array_of_words){
+		for (int i = 0; inp[i] != NULL; i++) {				// for loop that goes through each character of the input and checks it
+			if (inp[i]!=' ') {								// if the input character is not a space
+				array_of_words[word_count][j] = inp[i];		// element j of the current string = the input character
+				j++;										// increase word letter counter by 1
+			}
+			else if (j>0) {									// if input character is a space
+				array_of_words[word_count][j] = '\0';		// end the string with a NULL
+				array_of_words[word_count] = (char*)realloc(array_of_words[word_count],j+1); // allocate memory for the NULL
+				if (!array_of_words[word_count]) {
+					printf ("Error in String Passer\nerror reallocating memory"); 	// print error if error occurred allocating memory
+					return -1;
+				}
+				word_count++;												// increase the word counter by 1
+				array_of_words[word_count] = (char*)malloc (input_lenght);	// allocate memory for string
+				j = 0;
+
+			}else{
+				j=0;
+				continue;
+			}
+
+		array_of_words[word_count][j] = '\0';												// end string with NULL
+		array_of_words[word_count] = (char*)realloc (array_of_words[word_count], j + 1); 	// allocate memory for the NULL
+
+		if (!array_of_words[word_count]) {
+			printf ("Error in String Passer\nerror reallocating memory");	// print error if memory allocation failed
+			return -1;
+		}
+		word_count++;													// increase word count by 1
+		array_of_words[word_count] = (char*)malloc (input_lenght);		// allocate memory for size of input string
+		j = 0;
+		}
+
+		if(j>0){
+			array_of_words[word_count][j] = '\0';
+							array_of_words[word_count] = (char*)realloc(array_of_words[word_count],j+1);
+							if (!array_of_words[word_count]) {
+								printf ("Error in String Passer\nerror reallocsting memmory");
+								return -1;
+							}
+							word_count++;
+							array_of_words[word_count] = (char*)malloc (input_lenght);
+							j = 0;
+		}
+	}
+	else {
+		printf ("Error in String Passer\nerror allocating memory");		// print error message if memory allocation failed
+		return -1;
+	}
+	array_of_words = (char**)realloc (array_of_words, sizeof (*array_of_words) * word_count); // allocate memory for size of array of strings
+	*array_of_words_p = array_of_words;							// pointer to array of words
+	if (USR_DBG)printf ("WordCount = %d\n", word_count);		// debug messages
+	return word_count;
+}
+//     $Date: 2018-03-26 08:32:18 +1100 (Mon, 26 Mar 2018) $
+// $Revision: 1217 $
+//   $Author: Peter $
+
+#include "Ass-02.h"
+#ifdef STM32F407xx
+#include "usart.h"
+#endif
+#include <stdbool.h>
+
+
+enum CONTROL_CHARS {NUL=0,SOH,STX,ETX,EOT,ENQ,ACK,BEL,BS,TAB,LF,VT,FF,CR,SO,SI,DLE,DC1,DC2,DC3,DC4,NAK,SYN,ETB,CAN,EM,SUB,ESC,FS,GS,RS,US=31,DEL=127};
+
+int isControlChar(char c){				// checks input character against the ascii table
+	if (c<32||c==127) return true;		// returns true if input is a valid character
+	else return false;					// valid characters are 32-127 on ascii table
+}
+
+int _count=0;	// universal counter
+char *input_s; 	// array which stores the characters
+char **words;	// pointer to array of strings
+
+void CommandLineParserInit(void)
+{
+  // Print welcome message
+  printf("\014");
+  printf("ELEC3730 Assignment 2\n");
+  printf("Command Line Parser Example\n");
+}
+
+
+void CommandLineParserProcess(void)
+{
+  int wordcount=0;
+  uint8_t c;
+  // Check for input and echo back
+#ifdef STM32F407xx
+  if (HAL_UART_Receive(&huart2, &c, 1, 0x0) == HAL_OK) //Receive a new character and store in c
+  {
+	HAL_GPIO_TogglePin(GPIOD, LD4_Pin); 		// Toggle LED4
+	if (!isControlChar(c)){						// check that user entered a character and not a control character
+		input_s=realloc(input_s, _count+1);
+		printf("%c", c);
+		input_s[_count]=c;						// store in the next element of array
+		_count++;								// increase counter by 1
+	} else {
+		switch (c){
+		case CR :												// case 1: if user presses "enter"
+			printf("\n");
+			if (_count>0){
+				input_s[_count] = '\0';							// add \0 to the end of the string
+				wordcount = string_parser (input_s, &words); 	// call string parser function
+				Command_Function(wordcount, words);
+				if(USR_DBG)printf("%s\n",input_s);				// prints debug messages
+				_count = 0;
+			}
+			break;
+		case DEL:			// case 2: if user presses "backspace"
+			printf("\b \b");
+			_count--;		// subtract 1 from count
+			break;
+
+		default:				// when a control character is entered that is NOT enter or backspace
+			printf(" %i ",c);	// print the ascii number of the control character that was entered
+		}
+	}
+}
+
+
+#else
+  c = getchar();
+  printf("SERIAL: Got '%c'\n", c);
+#endif
+}
+
+//     $Date: 2018-03-26 08:32:18 +1100 (Mon, 26 Mar 2018) $
+// $Revision: 1217 $
+//   $Author: Peter $
+
+#include "Ass-02.h"
+
+#define ygrid (240-1)/5
+#define xgrid (320)/5
+#define FILL_COLOUR	0xFFFF
+#define ALT_COLOUR	0x9CB2
+#define TEXT_COLOUR 0x127C
+#define COLOUR_BLACK 0xFFFF
+#define COLOUR_WHITE 0x0000
+#define MAX_LEN 18
+bool _KEY_DOWN;
+
+typedef struct button{
+	char * ID;
+	uint16_t x, y ,width, hight;
+	char * text;
+	uint16_t fillColour;
+	uint16_t altfillColour;
+	uint16_t textColour;
+};
+
+void button_show(struct button B){
+	BSP_LCD_SetTextColor(B.fillColour);
+	BSP_LCD_FillRect(B.x, B.y, B.width,	B.hight);
+	BSP_LCD_SetTextColor(B.textColour);
+	BSP_LCD_SetBackColor(B.fillColour);
+	BSP_LCD_DisplayStringAt(B.x+B.width/2, B.y+B.hight/2, B.text, CENTER_MODE);
+}
+
+void button_press(struct button B){
+	BSP_LCD_SetBackColor(B.altfillColour);
+	BSP_LCD_FillRect(B.x, B.y, B.width,	B.hight);
+	BSP_LCD_SetTextColor(B.textColour);
+	BSP_LCD_SetBackColor(B.altfillColour);
+	BSP_LCD_DisplayStringAt(B.x+B.width/2, B.y+B.hight/2, B.text, CENTER_MODE);
+}
+
+bool is_pressed(struct button B,Coordinate *point){
+	if (point->x > B.x && point->x < B.x+B.width && point->y > B.y && point->y < B.y+B.hight) return true;
+	else return false;
+}
+
+struct button buttons[]={
+		{"0",0*xgrid,4*ygrid,2*xgrid,ygrid,"0",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"1",0*xgrid,1*ygrid,xgrid,ygrid,"1",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"2",1*xgrid,1*ygrid,xgrid,ygrid,"2",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"3",2*xgrid,1*ygrid,xgrid,ygrid,"3",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"4",0*xgrid,2*ygrid,xgrid,ygrid,"4",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"5",1*xgrid,2*ygrid,xgrid,ygrid,"5",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"6",2*xgrid,2*ygrid,xgrid,ygrid,"6",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"7",0*xgrid,3*ygrid,xgrid,ygrid,"7",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"8",1*xgrid,3*ygrid,xgrid,ygrid,"8",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"9",2*xgrid,3*ygrid,xgrid,ygrid,"9",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"+",3*xgrid,1*ygrid,xgrid,ygrid,"+",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"-",3*xgrid,2*ygrid,xgrid,ygrid,"-",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{".",3*xgrid,3*ygrid,xgrid,ygrid,".",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"=",3*xgrid,4*ygrid,xgrid,ygrid,"=",0x47AE,0x0464,TEXT_COLOUR},
+		{"*",4*xgrid,1*ygrid,xgrid,ygrid,"*",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"/",4*xgrid,2*ygrid,xgrid,ygrid,"/",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"^",4*xgrid,3*ygrid,xgrid,ygrid,"POW",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"C",4*xgrid,4*ygrid,xgrid,ygrid,"C",0xFA8A,0xA000,TEXT_COLOUR},
+		{"`",2*xgrid,4*ygrid,xgrid,ygrid,"+/-",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{NULL,NULL,NULL,NULL,NULL,NULL,NULL}
+};
+
+int _ITT = 0;
+char ** opperands;
+char _OPPERATOR=NULL;
+void button_pressed(struct button key){
+	char * scratch;
+	BSP_LCD_SetTextColor(COLOUR_WHITE);
+	BSP_LCD_FillRect(0,0,BSP_LCD_GetXSize(),ygrid);
+	double result=0;
+	switch (key.ID[0]){
+	case '`':
+		if (opperands[_ITT][0]=='-'){
+			opperands[_ITT][0]='+';
+		}else if (opperands[_ITT][0]=='+'){
+			opperands[_ITT][0]='-';
+		}else{
+			scratch = malloc(MAX_LEN);
+			strcpy(scratch,"-");
+			opperands[_ITT]=strcat(scratch,opperands[_ITT]);
+			scratch=NULL;
+		}
+		break;
+	case 'C':
+		if (strlen(opperands[_ITT])>0)opperands[_ITT]=strcpy(opperands[_ITT],"\0");
+		else {
+			_ITT=0;
+			strcpy(opperands[0],"\0");
+			strcpy(opperands[1],"\0");
+			_OPPERATOR=NULL;
+		}
+		break;
+	case '+':
+	case '-':
+	case '/':
+	case '*':
+	case '^':
+	case '=':
+		if (_OPPERATOR==NULL||(strlen(opperands[1])<1)){
+			_OPPERATOR=key.ID[0];
+			if(_ITT<1){
+				_ITT=(_ITT+1)%2;
+			}
+		}else{
+			double n1 = atof(opperands[0]);
+			double n2 = atof(opperands[1]);
+			switch(_OPPERATOR){
+			case '+':
+				result = n1+n2;
+				break;
+			case '*':
+				result = n1*n2;
+				break;
+			case '/':
+				result = n1/n2;
+				break;
+			case '-':
+				result = n1-n2;
+				break;
+			case '^':
+				result = pow(n1,n2);
+				break;
+			case '=':
+				break;
+			}
+			_OPPERATOR=key.ID[0];
+			strcpy(opperands[1],"\0");
+			opperands[0]=realloc(opperands[0],MAX_LEN);
+			snprintf(opperands[0],MAX_LEN,"%lf",result);
+			_ITT=1;
+		}
+		break;
+	case '0':
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '5':
+	case '6':
+	case '7':
+	case '8':
+	case '9':
+		if (strlen(opperands[_ITT])<MAX_LEN){
+			opperands[_ITT] = realloc(opperands[_ITT],(strlen(opperands[_ITT])+1)+(strlen(key.ID)+1));
+			strcat(opperands[_ITT],key.ID);
+			printf("\n%i:%s\n",_ITT,opperands[_ITT]);
+		}
+		break;
+	case '.':
+		if (strchr(opperands[_ITT],'.')==NULL){
+			strcat(opperands[_ITT],key.ID);
+		}
+		break;
+	}
+
+	if(strlen(opperands[_ITT])>1&&opperands[_ITT][0]=='0'){
+			char* new=strpbrk(opperands[_ITT], "-123456789.");
+			if (new!=NULL){
+				opperands[_ITT]=new;
+			}
+	}
+	int width=(((sFONT *)BSP_LCD_GetFont())->Width);
+	BSP_LCD_SetBackColor(COLOUR_WHITE);
+	BSP_LCD_SetTextColor(COLOUR_BLACK);
+	if (_OPPERATOR!=NULL)BSP_LCD_DisplayChar(BSP_LCD_GetXSize()-width,LINE(0), _OPPERATOR);
+	BSP_LCD_DisplayStringAt(BSP_LCD_GetXSize()-width,LINE(0), opperands[(_ITT+1)%2] , RIGHT_MODE);
+	BSP_LCD_DisplayStringAt(BSP_LCD_GetXSize(),LINE(1), opperands[_ITT] , RIGHT_MODE);
+}
+
+
+void CalculatorInit(void)
+{
+  BSP_LCD_Init();
+  BSP_LCD_DisplayOn();
+  BSP_TP_Init();
+  if (USR_DBG)printf("Screen is %i X %i\n", BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+  for (int i=0;buttons[i].ID!=NULL;i++){
+	  button_show(buttons[i]);
+  }
+  opperands = malloc (2*sizeof(char*));
+  if (opperands == NULL){
+	  printf("MEMMORY ERROR");
+  }else{
+	  opperands[0]=malloc(1*sizeof(char));
+	  opperands[1]=malloc(1*sizeof(char));
+	  if (opperands[0]!=NULL){
+		  opperands[0][0]='\0';
+	  }else{
+		  printf("MEMMORY ERROR");
+	  }
+	  if (opperands[1]!=NULL){
+		  opperands[1][0]='\0';
+	  	  }else{
+	  		printf("MEMMORY ERROR");
+	  	  }
+  }
+}
+
+
+int _DEBOUNCE = 0;
+void CalculatorProcess(void)
+{
+  int state = BSP_TP_GetDisplayPoint(&display);
+  if (state == 0){
+	  _DEBOUNCE = 0;
+	  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_SET); // Toggle LED4
+	  if (!_KEY_DOWN){
+		  if (USR_DBG) printf("TOUCH GOT (%i,%i)\n",display.x,display.y);
+			for (int i=0;buttons[i].ID!=NULL;i++){
+				  if (is_pressed(buttons[i],&display)){
+					  if (USR_DBG) printf("%s PRESSED (%i,%i)",buttons[i].ID,display.x,display.y);
+					  button_press(buttons[i]);
+					  button_pressed(buttons[i]);
+					  _KEY_DOWN=true;
+				  }else{
+					  button_show(buttons[i]);
+			}
+	  	  }
+	  }
+  }else{
+	  if (_DEBOUNCE++ > 30){
+		  _KEY_DOWN=false;
+		  HAL_GPIO_WritePin(GPIOD, LD4_Pin,GPIO_PIN_RESET);
+	  }
+
+  }
+}
+//     $Date: 2018-03-26 08:32:18 +1100 (Mon, 26 Mar 2018) $
+// $Revision: 1217 $
+//   $Author: Peter $
+
+#include "Ass-02.h"
+
+//
+// REPLACE THE EXAMPLE CODE WITH YOUR CODE 
+//
+
+void Ass_02_Main(void)
+{
+#ifdef STM32F407xx
+  uint16_t i=0;
+#endif
+
+  // Initialise
+  CommandLineParserInit();
+#ifdef STM32F407xx
+  CalculatorInit();
+#endif
+
+  // Loop indefinitely
+  while (1)
+  {
+    CommandLineParserProcess();
+#ifdef STM32F407xx
+    CalculatorProcess();
+#endif
+
+#ifdef STM32F407xx
+    if (i++ > 10000)
+    {
+      HAL_GPIO_TogglePin(GPIOD, LD3_Pin); // Toggle LED3
+      i=0;
+    }
+#endif
+  }
+}
+//     $Date: 2018-03-26 08:32:18 +1100 (Mon, 26 Mar 2018) $
+// $Revision: 1217 $
+//   $Author: Peter $
+
+// Assignment 2 include file
+
+#ifndef ASS_02_H_
+#define ASS_02_H_
+
+// Standard includes
+#ifdef STM32F407xx
+#include "stm32f4xx_hal.h"
+#include "openx07v_c_lcd.h"
+#include "touch_panel.h"
+#else
+#include <windows.h>
+#endif
+#include <stdio.h>
+#include <stdint.h>
+#include <malloc.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+
+// Assignment main
+extern void Ass_02_Main(void);
+
+extern int8_t add (char *numbers_p[], uint8_t count);
+extern int8_t subtract (char *numbers_p[], uint8_t count);
+extern int8_t multiply (char *numbers_p[], uint8_t count);
+extern int8_t divide (char *numbers_p[], uint8_t count);
+extern int8_t debug(char *args[], uint8_t count);
+extern int8_t clear(char *args[], uint8_t count);
+extern int8_t help(char *args[], uint8_t count);
+extern int Command_Function(int num_count, char **Array_numbers);
+extern int string_parser (char *inp, char **array_of_words_p[]);
+
+// Question 1
+extern void CommandLineParserInit(void);
+extern void CommandLineParserProcess(void);
+bool USR_DBG;
+
+// Question 2
+extern void CalculatorInit(void);
+extern void CalculatorProcess(void);
+
+// Library functions
+#ifdef STM32F407xx
+extern uint8_t BSP_TP_Init(void);
+extern uint8_t BSP_TP_GetDisplayPoint(Coordinate *pDisplay);
+#endif
+
+#endif /* ASS_02_H_ */
