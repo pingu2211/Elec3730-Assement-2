@@ -63,7 +63,7 @@ struct button buttons[]={
 		{"*",4*xgrid,1*ygrid,xgrid,ygrid,"*",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"/",4*xgrid,2*ygrid,xgrid,ygrid,"/",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{"^",4*xgrid,3*ygrid,xgrid,ygrid,"POW",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
-		{"C",4*xgrid,4*ygrid,xgrid,ygrid,"C",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
+		{"C",4*xgrid,4*ygrid,xgrid,ygrid,"C",0xFA8A,0xA000,TEXT_COLOUR},
 		{"`",2*xgrid,4*ygrid,xgrid,ygrid,"+/-",FILL_COLOUR,ALT_COLOUR,TEXT_COLOUR},
 		{NULL,NULL,NULL,NULL,NULL,NULL,NULL}
 };

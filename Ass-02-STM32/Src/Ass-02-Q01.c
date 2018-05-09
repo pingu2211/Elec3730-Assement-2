@@ -73,8 +73,12 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 				word_count++;
 				array_of_words[word_count] = (char*)malloc (input_lenght);
 				j = 0;
+<<<<<<< HEAD
 			}
 			else {
+=======
+			}else{
+>>>>>>> 2aac30bf2ff0b710aaf4fa01b497d384767c8472
 				j=0;
 				continue;
 			}
