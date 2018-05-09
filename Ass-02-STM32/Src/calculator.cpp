@@ -70,13 +70,13 @@ int8_t add(char *numbers_p[], uint8_t count) {				// function adds 2 or more num
 
 
 int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 or more numbers together
-
+	printf("\ncount:%i\n",count);
 	double * numbers =  malloc(count*sizeof(double));		// allocate memory for input numbers
 	for (int i = 0; i < count; i++){
 		if (!isNumber(numbers_p[i])){						// if input is not a number
 			printf("Arguments must be real numbers");		// return a message to user that the input was not a number
 			return -1;
-		}else{
+		}else if (strlen(numbers_p[i])>0){
 			numbers[i]=atof(numbers_p[i]);					// take the input number that is a string of characters and convert to a double
 		}
 	}
@@ -84,7 +84,6 @@ int8_t multiply(char *numbers_p[], uint8_t count) {			// function multiplies 2 o
 	double sum = 1;
 	for (int i = 0; i < count; i++)
 	{
-
 		sum *= numbers[i];				// multiply each number together with first number multiplied by 1
 	}
 	printf("=%lf\n",sum);				// print result

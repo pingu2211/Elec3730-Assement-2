@@ -77,19 +77,8 @@ int string_parser (char *inp, char **array_of_words_p[]) {
 				j=0;
 				continue;
 			}
+
 		}
-
-		array_of_words[word_count][j] = '\0';
-		array_of_words[word_count] = (char*)realloc (array_of_words[word_count], j + 1);
-
-		if (!array_of_words[word_count]) {
-			printf ("Error in String Passer\nerror reallocating memory");
-			return -1;
-		}
-		word_count++;
-		array_of_words[word_count] = (char*)malloc (input_lenght);
-		j = 0;
-
 	}
 	else {
 		printf ("Error in String Passer\nerror allocating memory");
